@@ -24,6 +24,11 @@ class CSlangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by CSlangParser#literal.
+    def visitLiteral(self, ctx:CSlangParser.LiteralContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by CSlangParser#decl.
     def visitDecl(self, ctx:CSlangParser.DeclContext):
         return self.visitChildren(ctx)
@@ -36,6 +41,26 @@ class CSlangVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by CSlangParser#attr_decl.
     def visitAttr_decl(self, ctx:CSlangParser.Attr_declContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CSlangParser#attr_decl_exp.
+    def visitAttr_decl_exp(self, ctx:CSlangParser.Attr_decl_expContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CSlangParser#attr_decl_exp_no_value.
+    def visitAttr_decl_exp_no_value(self, ctx:CSlangParser.Attr_decl_exp_no_valueContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CSlangParser#attr_decl_exp_value.
+    def visitAttr_decl_exp_value(self, ctx:CSlangParser.Attr_decl_exp_valueContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CSlangParser#stmt.
+    def visitStmt(self, ctx:CSlangParser.StmtContext):
         return self.visitChildren(ctx)
 
 

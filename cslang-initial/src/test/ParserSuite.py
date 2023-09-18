@@ -2,19 +2,18 @@ import unittest
 from TestUtils import TestParser
 
 class ParserSuite(unittest.TestCase):
-    def test_simple_program(self):
-        """Simple program"""
-        _input = """A"""
-        expect = "successful"
-        self.assertTrue(TestParser.test(_input, expect, 301))
-
     def test_decl_class_empty(self):
         _input = """class A{}"""
         expect = "successful"
-        self.assertTrue(TestParser.test(_input, expect, 302))
+        self.assertTrue(TestParser.test(_input, expect, 301))
 
     def test_declare_class_with_var_decl(self):
         _input = """class A{var delta: int = 3;}"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 302))
+
+    def test_decl_class_inherit(self):
+        _input = """class A <- B{var delta: int = 3;}"""
         expect = "successful"
         self.assertTrue(TestParser.test(_input, expect, 303))
 
@@ -23,17 +22,37 @@ class ParserSuite(unittest.TestCase):
         expect = "successful"
         self.assertTrue(TestParser.test(_input, expect, 304))
 
+    def test_decl_const(self):
+        _input = """const width: int;"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 305))
+
+    def test_decl_multi(self):
+        _input = """class Program{ const a, b: int = 3, 6;}"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 306))
+
+    def test_decl_var_value(self):
+        _input = """var delta: int = 3;"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 307))
+
     def test_exp(self):
         _input = """a := 1;"""
         expect = "successful"
-        self.assertTrue(TestParser.test(_input, expect, 305))
+        self.assertTrue(TestParser.test(_input, expect, 308))
+
+    def test_assign_stmt(self):
+        _input = """a := 1 + 2;"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 309))
 
     def test_attr_decl(self):
         _input = """var a: int = 1;"""
         expect = "successful"
-        self.assertTrue(TestParser.test(_input, expect, 306))
+        self.assertTrue(TestParser.test(_input, expect, 310))
 
     def test_plus_exp(self):
         _input = """1 + 2"""
         expect = "successful"
-        self.assertTrue(TestParser.test(_input, expect, 307))
+        self.assertTrue(TestParser.test(_input, expect, 311))
