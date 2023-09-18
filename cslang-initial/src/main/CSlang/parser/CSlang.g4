@@ -8,28 +8,28 @@ options {
 	language = Python3;
 }
 
-program: EOF;
+program: (exp | assign_stmt | decl)+ EOF;
 
 // expressions
 exp: exp1 (MUL_OP | PLUS_OP) exp1 | exp1;
 
 exp1: INT_LIT | FLOAT_LIT;
 
-// declarations by BNF 
-// (not EBNF -> decl+)
-decllist: decl decllist | decl;
-
+// // declarations by BNF (not EBNF -> decl+)
+// decllist: decl decllist | decl;
 decl: class_decl | attr_decl;
 
-class_decl: CLASS ID ('<-' ID)? LCB (attr_decl)* RCB;
+class_decl: CLASS ID ('<-' ID)? LCB (assign_stmt)? RCB;
 
-attr_decl:
-	(VAR | CONST) ID (COMMA ID)* COLON INT (ASSIGN_OP exp)? SEMICOLON;
+// attr_decl:
+// 	(VAR | CONST) ID (COMMA ID)* COLON INT (
+// 		DECL_OP exp (COMMA exp)*
+// 	)? SEMICOLON;
 
-attr_decl1: ID EQUAL_OP INT_LIT;
+attr_decl: VAR ID COLON INT DECL_OP INT_LIT SEMICOLON;
 
 // statements
-assign_stmt: ID exp SEMICOLON;
+assign_stmt: ID ASSIGN_OP exp SEMICOLON;
 
 // Literals
 FLOAT_LIT: INT_LIT DECPART | INT_LIT DECPART? EXPPART;
@@ -119,7 +119,7 @@ EQUAL_OP: '==';
 
 ASSIGN_OP: ':=';
 
-// ASSIGN_OP: '=';
+DECL_OP: '=';
 
 DIFF_OP: '!=';
 

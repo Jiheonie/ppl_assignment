@@ -1,1 +1,1 @@
-Error on line 1 col 0: var
+Error on line 1 col 4: width
