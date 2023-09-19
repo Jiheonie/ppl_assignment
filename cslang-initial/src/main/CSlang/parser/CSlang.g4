@@ -122,32 +122,51 @@ exp1: literal;
 
 literal: INT_LIT | FLOAT_LIT | STR_LIT;
 
-// // declarations by BNF (not EBNF -> decl+)
-// decllist: decl decllist | decl;
+exp_list: exp (COMMA exp)*;
 
-decl: class_decl | attr_decl;
 
-class_decl: CLASS ID ('<-' ID)? LCB (stmt | attr_decl)* RCB;
 
-// attr_decl:
-// 	(VAR | CONST) ID (COMMA ID)* COLON INT (
-// 		DECL_OP exp (COMMA exp)*
-// 	)? SEMICOLON;
+decl: class_decl | attr_decl | method_decl;
 
+class_decl: CLASS ID ('<-' ID)? LCB (stmt | decl)* RCB;
+
+
+// method declaration
+method_decl: func_decl | constructor_decl | static_func_decl | static_constructor_decl;
+
+// replace Int by type
+func_decl: FUNC ID expo_func;
+static_func_decl: FUNC AT_ID expo_func;
+expo_func: LP params_list? RP COLON INT block_stmt;
+
+constructor_decl: FUNC ID expo_constructor;
+static_constructor_decl: FUNC AT_ID expo_constructor;
+expo_constructor: LP params_list? RP block_stmt;
+
+
+// attribute declaration
 attr_decl: (VAR | CONST) attr_decl_exp SEMICOLON;
 
-attr_decl_exp: attr_decl_exp_value | attr_decl_exp_no_value;
+attr_decl_exp: attr_decl_exp_full | attr_decl_exp_short;
 
-attr_decl_exp_no_value: ID COLON INT;
-
-attr_decl_exp_value: 
-	ID COMMA attr_decl_exp_value COMMA INT_LIT
+// replace INT_LIT with exp
+// replace INT with type
+attr_decl_exp_short: ID (COMMA ID)* COLON INT;
+attr_decl_exp_full: 
+	ID COMMA attr_decl_exp_full COMMA INT_LIT
 	| ID COLON INT DECL_OP INT_LIT;
 
 // statements
 stmt: assign_stmt;
 
 assign_stmt: ID ASSIGN_OP exp SEMICOLON;
+
+block_stmt: LCB () RCB;
+
+// replace INT with type
+params_list: param (COMMA param)* | params_same_type;
+param: ID COLON INT;
+params_same_type: ID (COMMA ID)* COLON INT;
 
 // Literals
 FLOAT_LIT: INT_LIT DECPART | INT_LIT DECPART? EXPPART;
@@ -169,6 +188,8 @@ BOOL_LIT: TRUE | FALSE;
 
 // Identifiers
 ID: [a-zA-Z_] [a-zA-Z0-9_]*;
+
+AT_ID: '@' [a-zA-Z0-9_]+;
 
 // COMMENT: ([/] [*]) ([]*?) ([*] [/])
 CMT_LINE: '//' ~[\r\n]* -> skip;

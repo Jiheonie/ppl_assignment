@@ -11,38 +11,86 @@ else:
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3@")
-        buf.write("g\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b")
-        buf.write("\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\3\2\3\2")
-        buf.write("\3\2\6\2\36\n\2\r\2\16\2\37\3\2\3\2\3\3\3\3\3\3\3\3\3")
-        buf.write("\3\3\3\3\3\3\3\3\3\5\3-\n\3\3\4\3\4\3\5\3\5\3\6\3\6\5")
-        buf.write("\6\65\n\6\3\7\3\7\3\7\3\7\5\7;\n\7\3\7\3\7\3\7\7\7@\n")
-        buf.write("\7\f\7\16\7C\13\7\3\7\3\7\3\b\3\b\3\b\3\b\3\t\3\t\5\t")
-        buf.write("M\n\t\3\n\3\n\3\n\3\n\3\13\3\13\3\13\3\13\3\13\3\13\3")
-        buf.write("\13\3\13\3\13\3\13\3\13\5\13^\n\13\3\f\3\f\3\r\3\r\3\r")
-        buf.write("\3\r\3\r\3\r\2\2\16\2\4\6\b\n\f\16\20\22\24\26\30\2\4")
-        buf.write("\3\2\679\4\2\23\23\27\27\2e\2\35\3\2\2\2\4,\3\2\2\2\6")
-        buf.write(".\3\2\2\2\b\60\3\2\2\2\n\64\3\2\2\2\f\66\3\2\2\2\16F\3")
-        buf.write("\2\2\2\20L\3\2\2\2\22N\3\2\2\2\24]\3\2\2\2\26_\3\2\2\2")
-        buf.write("\30a\3\2\2\2\32\36\5\4\3\2\33\36\5\30\r\2\34\36\5\n\6")
-        buf.write("\2\35\32\3\2\2\2\35\33\3\2\2\2\35\34\3\2\2\2\36\37\3\2")
-        buf.write("\2\2\37\35\3\2\2\2\37 \3\2\2\2 !\3\2\2\2!\"\7\2\2\3\"")
-        buf.write("\3\3\2\2\2#$\5\6\4\2$%\7\33\2\2%&\5\6\4\2&-\3\2\2\2\'")
-        buf.write("(\5\6\4\2()\7\31\2\2)*\5\6\4\2*-\3\2\2\2+-\5\6\4\2,#\3")
-        buf.write("\2\2\2,\'\3\2\2\2,+\3\2\2\2-\5\3\2\2\2./\5\b\5\2/\7\3")
-        buf.write("\2\2\2\60\61\t\2\2\2\61\t\3\2\2\2\62\65\5\f\7\2\63\65")
-        buf.write("\5\16\b\2\64\62\3\2\2\2\64\63\3\2\2\2\65\13\3\2\2\2\66")
-        buf.write("\67\7\21\2\2\67:\7;\2\289\7\3\2\29;\7;\2\2:8\3\2\2\2:")
-        buf.write(";\3\2\2\2;<\3\2\2\2<A\7\63\2\2=@\5\26\f\2>@\5\16\b\2?")
-        buf.write("=\3\2\2\2?>\3\2\2\2@C\3\2\2\2A?\3\2\2\2AB\3\2\2\2BD\3")
-        buf.write("\2\2\2CA\3\2\2\2DE\7\64\2\2E\r\3\2\2\2FG\t\3\2\2GH\5\20")
-        buf.write("\t\2HI\7\62\2\2I\17\3\2\2\2JM\5\24\13\2KM\5\22\n\2LJ\3")
-        buf.write("\2\2\2LK\3\2\2\2M\21\3\2\2\2NO\7;\2\2OP\7\61\2\2PQ\7\13")
-        buf.write("\2\2Q\23\3\2\2\2RS\7;\2\2ST\7\60\2\2TU\5\24\13\2UV\7\60")
-        buf.write("\2\2VW\78\2\2W^\3\2\2\2XY\7;\2\2YZ\7\61\2\2Z[\7\13\2\2")
-        buf.write("[\\\7#\2\2\\^\78\2\2]R\3\2\2\2]X\3\2\2\2^\25\3\2\2\2_")
-        buf.write("`\5\30\r\2`\27\3\2\2\2ab\7;\2\2bc\7\"\2\2cd\5\4\3\2de")
-        buf.write("\7\62\2\2e\31\3\2\2\2\13\35\37,\64:?AL]")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3A")
+        buf.write("\u00d3\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
+        buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
+        buf.write("\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31")
+        buf.write("\t\31\3\2\3\2\3\2\6\2\66\n\2\r\2\16\2\67\3\2\3\2\3\3\3")
+        buf.write("\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3E\n\3\3\4\3\4\3\5\3")
+        buf.write("\5\3\6\3\6\3\6\7\6N\n\6\f\6\16\6Q\13\6\3\7\3\7\3\7\5\7")
+        buf.write("V\n\7\3\b\3\b\3\b\3\b\5\b\\\n\b\3\b\3\b\3\b\7\ba\n\b\f")
+        buf.write("\b\16\bd\13\b\3\b\3\b\3\t\3\t\3\t\3\t\5\tl\n\t\3\n\3\n")
+        buf.write("\3\n\3\n\3\13\3\13\3\13\3\13\3\f\3\f\5\fx\n\f\3\f\3\f")
+        buf.write("\3\f\3\f\3\f\3\r\3\r\3\r\3\r\3\16\3\16\3\16\3\16\3\17")
+        buf.write("\3\17\5\17\u0089\n\17\3\17\3\17\3\17\3\20\3\20\3\20\3")
+        buf.write("\20\3\21\3\21\5\21\u0094\n\21\3\22\3\22\3\22\7\22\u0099")
+        buf.write("\n\22\f\22\16\22\u009c\13\22\3\22\3\22\3\22\3\23\3\23")
+        buf.write("\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\5\23\u00ac")
+        buf.write("\n\23\3\24\3\24\3\25\3\25\3\25\3\25\3\25\3\26\3\26\3\26")
+        buf.write("\3\26\3\27\3\27\3\27\7\27\u00bc\n\27\f\27\16\27\u00bf")
+        buf.write("\13\27\3\27\5\27\u00c2\n\27\3\30\3\30\3\30\3\30\3\31\3")
+        buf.write("\31\3\31\7\31\u00cb\n\31\f\31\16\31\u00ce\13\31\3\31\3")
+        buf.write("\31\3\31\3\31\2\2\32\2\4\6\b\n\f\16\20\22\24\26\30\32")
+        buf.write("\34\36 \"$&(*,.\60\2\4\3\2\679\4\2\23\23\27\27\2\u00d0")
+        buf.write("\2\65\3\2\2\2\4D\3\2\2\2\6F\3\2\2\2\bH\3\2\2\2\nJ\3\2")
+        buf.write("\2\2\fU\3\2\2\2\16W\3\2\2\2\20k\3\2\2\2\22m\3\2\2\2\24")
+        buf.write("q\3\2\2\2\26u\3\2\2\2\30~\3\2\2\2\32\u0082\3\2\2\2\34")
+        buf.write("\u0086\3\2\2\2\36\u008d\3\2\2\2 \u0093\3\2\2\2\"\u0095")
+        buf.write("\3\2\2\2$\u00ab\3\2\2\2&\u00ad\3\2\2\2(\u00af\3\2\2\2")
+        buf.write("*\u00b4\3\2\2\2,\u00c1\3\2\2\2.\u00c3\3\2\2\2\60\u00c7")
+        buf.write("\3\2\2\2\62\66\5\4\3\2\63\66\5(\25\2\64\66\5\f\7\2\65")
+        buf.write("\62\3\2\2\2\65\63\3\2\2\2\65\64\3\2\2\2\66\67\3\2\2\2")
+        buf.write("\67\65\3\2\2\2\678\3\2\2\289\3\2\2\29:\7\2\2\3:\3\3\2")
+        buf.write("\2\2;<\5\6\4\2<=\7\33\2\2=>\5\6\4\2>E\3\2\2\2?@\5\6\4")
+        buf.write("\2@A\7\31\2\2AB\5\6\4\2BE\3\2\2\2CE\5\6\4\2D;\3\2\2\2")
+        buf.write("D?\3\2\2\2DC\3\2\2\2E\5\3\2\2\2FG\5\b\5\2G\7\3\2\2\2H")
+        buf.write("I\t\2\2\2I\t\3\2\2\2JO\5\4\3\2KL\7\60\2\2LN\5\4\3\2MK")
+        buf.write("\3\2\2\2NQ\3\2\2\2OM\3\2\2\2OP\3\2\2\2P\13\3\2\2\2QO\3")
+        buf.write("\2\2\2RV\5\16\b\2SV\5\36\20\2TV\5\20\t\2UR\3\2\2\2US\3")
+        buf.write("\2\2\2UT\3\2\2\2V\r\3\2\2\2WX\7\21\2\2X[\7;\2\2YZ\7\3")
+        buf.write("\2\2Z\\\7;\2\2[Y\3\2\2\2[\\\3\2\2\2\\]\3\2\2\2]b\7\63")
+        buf.write("\2\2^a\5&\24\2_a\5\f\7\2`^\3\2\2\2`_\3\2\2\2ad\3\2\2\2")
+        buf.write("b`\3\2\2\2bc\3\2\2\2ce\3\2\2\2db\3\2\2\2ef\7\64\2\2f\17")
+        buf.write("\3\2\2\2gl\5\22\n\2hl\5\30\r\2il\5\24\13\2jl\5\32\16\2")
+        buf.write("kg\3\2\2\2kh\3\2\2\2ki\3\2\2\2kj\3\2\2\2l\21\3\2\2\2m")
+        buf.write("n\7\30\2\2no\7;\2\2op\5\26\f\2p\23\3\2\2\2qr\7\30\2\2")
+        buf.write("rs\7<\2\2st\5\26\f\2t\25\3\2\2\2uw\7+\2\2vx\5,\27\2wv")
+        buf.write("\3\2\2\2wx\3\2\2\2xy\3\2\2\2yz\7,\2\2z{\7\61\2\2{|\7\13")
+        buf.write("\2\2|}\5*\26\2}\27\3\2\2\2~\177\7\30\2\2\177\u0080\7;")
+        buf.write("\2\2\u0080\u0081\5\34\17\2\u0081\31\3\2\2\2\u0082\u0083")
+        buf.write("\7\30\2\2\u0083\u0084\7<\2\2\u0084\u0085\5\34\17\2\u0085")
+        buf.write("\33\3\2\2\2\u0086\u0088\7+\2\2\u0087\u0089\5,\27\2\u0088")
+        buf.write("\u0087\3\2\2\2\u0088\u0089\3\2\2\2\u0089\u008a\3\2\2\2")
+        buf.write("\u008a\u008b\7,\2\2\u008b\u008c\5*\26\2\u008c\35\3\2\2")
+        buf.write("\2\u008d\u008e\t\3\2\2\u008e\u008f\5 \21\2\u008f\u0090")
+        buf.write("\7\62\2\2\u0090\37\3\2\2\2\u0091\u0094\5$\23\2\u0092\u0094")
+        buf.write("\5\"\22\2\u0093\u0091\3\2\2\2\u0093\u0092\3\2\2\2\u0094")
+        buf.write("!\3\2\2\2\u0095\u009a\7;\2\2\u0096\u0097\7\60\2\2\u0097")
+        buf.write("\u0099\7;\2\2\u0098\u0096\3\2\2\2\u0099\u009c\3\2\2\2")
+        buf.write("\u009a\u0098\3\2\2\2\u009a\u009b\3\2\2\2\u009b\u009d\3")
+        buf.write("\2\2\2\u009c\u009a\3\2\2\2\u009d\u009e\7\61\2\2\u009e")
+        buf.write("\u009f\7\13\2\2\u009f#\3\2\2\2\u00a0\u00a1\7;\2\2\u00a1")
+        buf.write("\u00a2\7\60\2\2\u00a2\u00a3\5$\23\2\u00a3\u00a4\7\60\2")
+        buf.write("\2\u00a4\u00a5\78\2\2\u00a5\u00ac\3\2\2\2\u00a6\u00a7")
+        buf.write("\7;\2\2\u00a7\u00a8\7\61\2\2\u00a8\u00a9\7\13\2\2\u00a9")
+        buf.write("\u00aa\7#\2\2\u00aa\u00ac\78\2\2\u00ab\u00a0\3\2\2\2\u00ab")
+        buf.write("\u00a6\3\2\2\2\u00ac%\3\2\2\2\u00ad\u00ae\5(\25\2\u00ae")
+        buf.write("\'\3\2\2\2\u00af\u00b0\7;\2\2\u00b0\u00b1\7\"\2\2\u00b1")
+        buf.write("\u00b2\5\4\3\2\u00b2\u00b3\7\62\2\2\u00b3)\3\2\2\2\u00b4")
+        buf.write("\u00b5\7\63\2\2\u00b5\u00b6\3\2\2\2\u00b6\u00b7\7\64\2")
+        buf.write("\2\u00b7+\3\2\2\2\u00b8\u00bd\5.\30\2\u00b9\u00ba\7\60")
+        buf.write("\2\2\u00ba\u00bc\5.\30\2\u00bb\u00b9\3\2\2\2\u00bc\u00bf")
+        buf.write("\3\2\2\2\u00bd\u00bb\3\2\2\2\u00bd\u00be\3\2\2\2\u00be")
+        buf.write("\u00c2\3\2\2\2\u00bf\u00bd\3\2\2\2\u00c0\u00c2\5\60\31")
+        buf.write("\2\u00c1\u00b8\3\2\2\2\u00c1\u00c0\3\2\2\2\u00c2-\3\2")
+        buf.write("\2\2\u00c3\u00c4\7;\2\2\u00c4\u00c5\7\61\2\2\u00c5\u00c6")
+        buf.write("\7\13\2\2\u00c6/\3\2\2\2\u00c7\u00cc\7;\2\2\u00c8\u00c9")
+        buf.write("\7\60\2\2\u00c9\u00cb\7;\2\2\u00ca\u00c8\3\2\2\2\u00cb")
+        buf.write("\u00ce\3\2\2\2\u00cc\u00ca\3\2\2\2\u00cc\u00cd\3\2\2\2")
+        buf.write("\u00cd\u00cf\3\2\2\2\u00ce\u00cc\3\2\2\2\u00cf\u00d0\7")
+        buf.write("\61\2\2\u00d0\u00d1\7\13\2\2\u00d1\61\3\2\2\2\23\65\67")
+        buf.write("DOU[`bkw\u0088\u0093\u009a\u00ab\u00bd\u00c1\u00cc")
         return buf.getvalue()
 
 
@@ -76,25 +124,40 @@ class CSlangParser ( Parser ):
                       "GREATER_EQUAL_OP", "CONCAT_OP", "DIV_OP", "LP", "RP", 
                       "LSB", "RSB", "DOT", "COMMA", "COLON", "SEMICOLON", 
                       "LCB", "RCB", "SIN_Q", "DOU_Q", "FLOAT_LIT", "INT_LIT", 
-                      "STR_LIT", "BOOL_LIT", "ID", "CMT_LINE", "WS", "ERROR_CHAR", 
-                      "UNCLOSE_STRING", "ILLEGAL_ESCAPE" ]
+                      "STR_LIT", "BOOL_LIT", "ID", "AT_ID", "CMT_LINE", 
+                      "WS", "ERROR_CHAR", "UNCLOSE_STRING", "ILLEGAL_ESCAPE" ]
 
     RULE_program = 0
     RULE_exp = 1
     RULE_exp1 = 2
     RULE_literal = 3
-    RULE_decl = 4
-    RULE_class_decl = 5
-    RULE_attr_decl = 6
-    RULE_attr_decl_exp = 7
-    RULE_attr_decl_exp_no_value = 8
-    RULE_attr_decl_exp_value = 9
-    RULE_stmt = 10
-    RULE_assign_stmt = 11
+    RULE_exp_list = 4
+    RULE_decl = 5
+    RULE_class_decl = 6
+    RULE_method_decl = 7
+    RULE_func_decl = 8
+    RULE_static_func_decl = 9
+    RULE_expo_func = 10
+    RULE_constructor_decl = 11
+    RULE_static_constructor_decl = 12
+    RULE_expo_constructor = 13
+    RULE_attr_decl = 14
+    RULE_attr_decl_exp = 15
+    RULE_attr_decl_exp_short = 16
+    RULE_attr_decl_exp_full = 17
+    RULE_stmt = 18
+    RULE_assign_stmt = 19
+    RULE_block_stmt = 20
+    RULE_params_list = 21
+    RULE_param = 22
+    RULE_params_same_type = 23
 
-    ruleNames =  [ "program", "exp", "exp1", "literal", "decl", "class_decl", 
-                   "attr_decl", "attr_decl_exp", "attr_decl_exp_no_value", 
-                   "attr_decl_exp_value", "stmt", "assign_stmt" ]
+    ruleNames =  [ "program", "exp", "exp1", "literal", "exp_list", "decl", 
+                   "class_decl", "method_decl", "func_decl", "static_func_decl", 
+                   "expo_func", "constructor_decl", "static_constructor_decl", 
+                   "expo_constructor", "attr_decl", "attr_decl_exp", "attr_decl_exp_short", 
+                   "attr_decl_exp_full", "stmt", "assign_stmt", "block_stmt", 
+                   "params_list", "param", "params_same_type" ]
 
     EOF = Token.EOF
     T__0=1
@@ -154,11 +217,12 @@ class CSlangParser ( Parser ):
     STR_LIT=55
     BOOL_LIT=56
     ID=57
-    CMT_LINE=58
-    WS=59
-    ERROR_CHAR=60
-    UNCLOSE_STRING=61
-    ILLEGAL_ESCAPE=62
+    AT_ID=58
+    CMT_LINE=59
+    WS=60
+    ERROR_CHAR=61
+    UNCLOSE_STRING=62
+    ILLEGAL_ESCAPE=63
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -213,35 +277,35 @@ class CSlangParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 27 
+            self.state = 51 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 27
+                self.state = 51
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [CSlangParser.FLOAT_LIT, CSlangParser.INT_LIT, CSlangParser.STR_LIT]:
-                    self.state = 24
+                    self.state = 48
                     self.exp()
                     pass
                 elif token in [CSlangParser.ID]:
-                    self.state = 25
+                    self.state = 49
                     self.assign_stmt()
                     pass
-                elif token in [CSlangParser.CLASS, CSlangParser.VAR, CSlangParser.CONST]:
-                    self.state = 26
+                elif token in [CSlangParser.CLASS, CSlangParser.VAR, CSlangParser.CONST, CSlangParser.FUNC]:
+                    self.state = 50
                     self.decl()
                     pass
                 else:
                     raise NoViableAltException(self)
 
-                self.state = 29 
+                self.state = 53 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSlangParser.CLASS) | (1 << CSlangParser.VAR) | (1 << CSlangParser.CONST) | (1 << CSlangParser.FLOAT_LIT) | (1 << CSlangParser.INT_LIT) | (1 << CSlangParser.STR_LIT) | (1 << CSlangParser.ID))) != 0)):
+                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSlangParser.CLASS) | (1 << CSlangParser.VAR) | (1 << CSlangParser.CONST) | (1 << CSlangParser.FUNC) | (1 << CSlangParser.FLOAT_LIT) | (1 << CSlangParser.INT_LIT) | (1 << CSlangParser.STR_LIT) | (1 << CSlangParser.ID))) != 0)):
                     break
 
-            self.state = 31
+            self.state = 55
             self.match(CSlangParser.EOF)
         except RecognitionException as re:
             localctx.exception = re
@@ -283,32 +347,32 @@ class CSlangParser ( Parser ):
         localctx = CSlangParser.ExpContext(self, self._ctx, self.state)
         self.enterRule(localctx, 2, self.RULE_exp)
         try:
-            self.state = 42
+            self.state = 66
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,2,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 33
+                self.state = 57
                 self.exp1()
-                self.state = 34
+                self.state = 58
                 self.match(CSlangParser.MUL_OP)
-                self.state = 35
+                self.state = 59
                 self.exp1()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 37
+                self.state = 61
                 self.exp1()
-                self.state = 38
+                self.state = 62
                 self.match(CSlangParser.PLUS_OP)
-                self.state = 39
+                self.state = 63
                 self.exp1()
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 41
+                self.state = 65
                 self.exp1()
                 pass
 
@@ -345,7 +409,7 @@ class CSlangParser ( Parser ):
         self.enterRule(localctx, 4, self.RULE_exp1)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 44
+            self.state = 68
             self.literal()
         except RecognitionException as re:
             localctx.exception = re
@@ -385,13 +449,69 @@ class CSlangParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 46
+            self.state = 70
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSlangParser.FLOAT_LIT) | (1 << CSlangParser.INT_LIT) | (1 << CSlangParser.STR_LIT))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
                 self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class Exp_listContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def exp(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(CSlangParser.ExpContext)
+            else:
+                return self.getTypedRuleContext(CSlangParser.ExpContext,i)
+
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSlangParser.COMMA)
+            else:
+                return self.getToken(CSlangParser.COMMA, i)
+
+        def getRuleIndex(self):
+            return CSlangParser.RULE_exp_list
+
+
+
+
+    def exp_list(self):
+
+        localctx = CSlangParser.Exp_listContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 8, self.RULE_exp_list)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 72
+            self.exp()
+            self.state = 77
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while _la==CSlangParser.COMMA:
+                self.state = 73
+                self.match(CSlangParser.COMMA)
+                self.state = 74
+                self.exp()
+                self.state = 79
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -416,6 +536,10 @@ class CSlangParser ( Parser ):
             return self.getTypedRuleContext(CSlangParser.Attr_declContext,0)
 
 
+        def method_decl(self):
+            return self.getTypedRuleContext(CSlangParser.Method_declContext,0)
+
+
         def getRuleIndex(self):
             return CSlangParser.RULE_decl
 
@@ -425,20 +549,25 @@ class CSlangParser ( Parser ):
     def decl(self):
 
         localctx = CSlangParser.DeclContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 8, self.RULE_decl)
+        self.enterRule(localctx, 10, self.RULE_decl)
         try:
-            self.state = 50
+            self.state = 83
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSlangParser.CLASS]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 48
+                self.state = 80
                 self.class_decl()
                 pass
             elif token in [CSlangParser.VAR, CSlangParser.CONST]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 49
+                self.state = 81
                 self.attr_decl()
+                pass
+            elif token in [CSlangParser.FUNC]:
+                self.enterOuterAlt(localctx, 3)
+                self.state = 82
+                self.method_decl()
                 pass
             else:
                 raise NoViableAltException(self)
@@ -481,11 +610,11 @@ class CSlangParser ( Parser ):
                 return self.getTypedRuleContext(CSlangParser.StmtContext,i)
 
 
-        def attr_decl(self, i:int=None):
+        def decl(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(CSlangParser.Attr_declContext)
+                return self.getTypedRuleContexts(CSlangParser.DeclContext)
             else:
-                return self.getTypedRuleContext(CSlangParser.Attr_declContext,i)
+                return self.getTypedRuleContext(CSlangParser.DeclContext,i)
 
 
         def getRuleIndex(self):
@@ -497,50 +626,421 @@ class CSlangParser ( Parser ):
     def class_decl(self):
 
         localctx = CSlangParser.Class_declContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 10, self.RULE_class_decl)
+        self.enterRule(localctx, 12, self.RULE_class_decl)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 52
+            self.state = 85
             self.match(CSlangParser.CLASS)
-            self.state = 53
+            self.state = 86
             self.match(CSlangParser.ID)
-            self.state = 56
+            self.state = 89
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSlangParser.T__0:
-                self.state = 54
+                self.state = 87
                 self.match(CSlangParser.T__0)
-                self.state = 55
+                self.state = 88
                 self.match(CSlangParser.ID)
 
 
-            self.state = 58
+            self.state = 91
             self.match(CSlangParser.LCB)
-            self.state = 63
+            self.state = 96
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSlangParser.VAR) | (1 << CSlangParser.CONST) | (1 << CSlangParser.ID))) != 0):
-                self.state = 61
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSlangParser.CLASS) | (1 << CSlangParser.VAR) | (1 << CSlangParser.CONST) | (1 << CSlangParser.FUNC) | (1 << CSlangParser.ID))) != 0):
+                self.state = 94
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [CSlangParser.ID]:
-                    self.state = 59
+                    self.state = 92
                     self.stmt()
                     pass
-                elif token in [CSlangParser.VAR, CSlangParser.CONST]:
-                    self.state = 60
-                    self.attr_decl()
+                elif token in [CSlangParser.CLASS, CSlangParser.VAR, CSlangParser.CONST, CSlangParser.FUNC]:
+                    self.state = 93
+                    self.decl()
                     pass
                 else:
                     raise NoViableAltException(self)
 
-                self.state = 65
+                self.state = 98
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 66
+            self.state = 99
             self.match(CSlangParser.RCB)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class Method_declContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def func_decl(self):
+            return self.getTypedRuleContext(CSlangParser.Func_declContext,0)
+
+
+        def constructor_decl(self):
+            return self.getTypedRuleContext(CSlangParser.Constructor_declContext,0)
+
+
+        def static_func_decl(self):
+            return self.getTypedRuleContext(CSlangParser.Static_func_declContext,0)
+
+
+        def static_constructor_decl(self):
+            return self.getTypedRuleContext(CSlangParser.Static_constructor_declContext,0)
+
+
+        def getRuleIndex(self):
+            return CSlangParser.RULE_method_decl
+
+
+
+
+    def method_decl(self):
+
+        localctx = CSlangParser.Method_declContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 14, self.RULE_method_decl)
+        try:
+            self.state = 105
+            self._errHandler.sync(self)
+            la_ = self._interp.adaptivePredict(self._input,8,self._ctx)
+            if la_ == 1:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 101
+                self.func_decl()
+                pass
+
+            elif la_ == 2:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 102
+                self.constructor_decl()
+                pass
+
+            elif la_ == 3:
+                self.enterOuterAlt(localctx, 3)
+                self.state = 103
+                self.static_func_decl()
+                pass
+
+            elif la_ == 4:
+                self.enterOuterAlt(localctx, 4)
+                self.state = 104
+                self.static_constructor_decl()
+                pass
+
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class Func_declContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def FUNC(self):
+            return self.getToken(CSlangParser.FUNC, 0)
+
+        def ID(self):
+            return self.getToken(CSlangParser.ID, 0)
+
+        def expo_func(self):
+            return self.getTypedRuleContext(CSlangParser.Expo_funcContext,0)
+
+
+        def getRuleIndex(self):
+            return CSlangParser.RULE_func_decl
+
+
+
+
+    def func_decl(self):
+
+        localctx = CSlangParser.Func_declContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 16, self.RULE_func_decl)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 107
+            self.match(CSlangParser.FUNC)
+            self.state = 108
+            self.match(CSlangParser.ID)
+            self.state = 109
+            self.expo_func()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class Static_func_declContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def FUNC(self):
+            return self.getToken(CSlangParser.FUNC, 0)
+
+        def AT_ID(self):
+            return self.getToken(CSlangParser.AT_ID, 0)
+
+        def expo_func(self):
+            return self.getTypedRuleContext(CSlangParser.Expo_funcContext,0)
+
+
+        def getRuleIndex(self):
+            return CSlangParser.RULE_static_func_decl
+
+
+
+
+    def static_func_decl(self):
+
+        localctx = CSlangParser.Static_func_declContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 18, self.RULE_static_func_decl)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 111
+            self.match(CSlangParser.FUNC)
+            self.state = 112
+            self.match(CSlangParser.AT_ID)
+            self.state = 113
+            self.expo_func()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class Expo_funcContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def LP(self):
+            return self.getToken(CSlangParser.LP, 0)
+
+        def RP(self):
+            return self.getToken(CSlangParser.RP, 0)
+
+        def COLON(self):
+            return self.getToken(CSlangParser.COLON, 0)
+
+        def INT(self):
+            return self.getToken(CSlangParser.INT, 0)
+
+        def block_stmt(self):
+            return self.getTypedRuleContext(CSlangParser.Block_stmtContext,0)
+
+
+        def params_list(self):
+            return self.getTypedRuleContext(CSlangParser.Params_listContext,0)
+
+
+        def getRuleIndex(self):
+            return CSlangParser.RULE_expo_func
+
+
+
+
+    def expo_func(self):
+
+        localctx = CSlangParser.Expo_funcContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 20, self.RULE_expo_func)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 115
+            self.match(CSlangParser.LP)
+            self.state = 117
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            if _la==CSlangParser.ID:
+                self.state = 116
+                self.params_list()
+
+
+            self.state = 119
+            self.match(CSlangParser.RP)
+            self.state = 120
+            self.match(CSlangParser.COLON)
+            self.state = 121
+            self.match(CSlangParser.INT)
+            self.state = 122
+            self.block_stmt()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class Constructor_declContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def FUNC(self):
+            return self.getToken(CSlangParser.FUNC, 0)
+
+        def ID(self):
+            return self.getToken(CSlangParser.ID, 0)
+
+        def expo_constructor(self):
+            return self.getTypedRuleContext(CSlangParser.Expo_constructorContext,0)
+
+
+        def getRuleIndex(self):
+            return CSlangParser.RULE_constructor_decl
+
+
+
+
+    def constructor_decl(self):
+
+        localctx = CSlangParser.Constructor_declContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 22, self.RULE_constructor_decl)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 124
+            self.match(CSlangParser.FUNC)
+            self.state = 125
+            self.match(CSlangParser.ID)
+            self.state = 126
+            self.expo_constructor()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class Static_constructor_declContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def FUNC(self):
+            return self.getToken(CSlangParser.FUNC, 0)
+
+        def AT_ID(self):
+            return self.getToken(CSlangParser.AT_ID, 0)
+
+        def expo_constructor(self):
+            return self.getTypedRuleContext(CSlangParser.Expo_constructorContext,0)
+
+
+        def getRuleIndex(self):
+            return CSlangParser.RULE_static_constructor_decl
+
+
+
+
+    def static_constructor_decl(self):
+
+        localctx = CSlangParser.Static_constructor_declContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 24, self.RULE_static_constructor_decl)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 128
+            self.match(CSlangParser.FUNC)
+            self.state = 129
+            self.match(CSlangParser.AT_ID)
+            self.state = 130
+            self.expo_constructor()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class Expo_constructorContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def LP(self):
+            return self.getToken(CSlangParser.LP, 0)
+
+        def RP(self):
+            return self.getToken(CSlangParser.RP, 0)
+
+        def block_stmt(self):
+            return self.getTypedRuleContext(CSlangParser.Block_stmtContext,0)
+
+
+        def params_list(self):
+            return self.getTypedRuleContext(CSlangParser.Params_listContext,0)
+
+
+        def getRuleIndex(self):
+            return CSlangParser.RULE_expo_constructor
+
+
+
+
+    def expo_constructor(self):
+
+        localctx = CSlangParser.Expo_constructorContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 26, self.RULE_expo_constructor)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 132
+            self.match(CSlangParser.LP)
+            self.state = 134
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            if _la==CSlangParser.ID:
+                self.state = 133
+                self.params_list()
+
+
+            self.state = 136
+            self.match(CSlangParser.RP)
+            self.state = 137
+            self.block_stmt()
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -579,20 +1079,20 @@ class CSlangParser ( Parser ):
     def attr_decl(self):
 
         localctx = CSlangParser.Attr_declContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 12, self.RULE_attr_decl)
+        self.enterRule(localctx, 28, self.RULE_attr_decl)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 68
+            self.state = 139
             _la = self._input.LA(1)
             if not(_la==CSlangParser.VAR or _la==CSlangParser.CONST):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
                 self.consume()
-            self.state = 69
+            self.state = 140
             self.attr_decl_exp()
-            self.state = 70
+            self.state = 141
             self.match(CSlangParser.SEMICOLON)
         except RecognitionException as re:
             localctx.exception = re
@@ -610,12 +1110,12 @@ class CSlangParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def attr_decl_exp_value(self):
-            return self.getTypedRuleContext(CSlangParser.Attr_decl_exp_valueContext,0)
+        def attr_decl_exp_full(self):
+            return self.getTypedRuleContext(CSlangParser.Attr_decl_exp_fullContext,0)
 
 
-        def attr_decl_exp_no_value(self):
-            return self.getTypedRuleContext(CSlangParser.Attr_decl_exp_no_valueContext,0)
+        def attr_decl_exp_short(self):
+            return self.getTypedRuleContext(CSlangParser.Attr_decl_exp_shortContext,0)
 
 
         def getRuleIndex(self):
@@ -627,21 +1127,21 @@ class CSlangParser ( Parser ):
     def attr_decl_exp(self):
 
         localctx = CSlangParser.Attr_decl_expContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 14, self.RULE_attr_decl_exp)
+        self.enterRule(localctx, 30, self.RULE_attr_decl_exp)
         try:
-            self.state = 74
+            self.state = 145
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,7,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,11,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 72
-                self.attr_decl_exp_value()
+                self.state = 143
+                self.attr_decl_exp_full()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 73
-                self.attr_decl_exp_no_value()
+                self.state = 144
+                self.attr_decl_exp_short()
                 pass
 
 
@@ -654,15 +1154,18 @@ class CSlangParser ( Parser ):
         return localctx
 
 
-    class Attr_decl_exp_no_valueContext(ParserRuleContext):
+    class Attr_decl_exp_shortContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def ID(self):
-            return self.getToken(CSlangParser.ID, 0)
+        def ID(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSlangParser.ID)
+            else:
+                return self.getToken(CSlangParser.ID, i)
 
         def COLON(self):
             return self.getToken(CSlangParser.COLON, 0)
@@ -670,23 +1173,42 @@ class CSlangParser ( Parser ):
         def INT(self):
             return self.getToken(CSlangParser.INT, 0)
 
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSlangParser.COMMA)
+            else:
+                return self.getToken(CSlangParser.COMMA, i)
+
         def getRuleIndex(self):
-            return CSlangParser.RULE_attr_decl_exp_no_value
+            return CSlangParser.RULE_attr_decl_exp_short
 
 
 
 
-    def attr_decl_exp_no_value(self):
+    def attr_decl_exp_short(self):
 
-        localctx = CSlangParser.Attr_decl_exp_no_valueContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 16, self.RULE_attr_decl_exp_no_value)
+        localctx = CSlangParser.Attr_decl_exp_shortContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 32, self.RULE_attr_decl_exp_short)
+        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 76
+            self.state = 147
             self.match(CSlangParser.ID)
-            self.state = 77
+            self.state = 152
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while _la==CSlangParser.COMMA:
+                self.state = 148
+                self.match(CSlangParser.COMMA)
+                self.state = 149
+                self.match(CSlangParser.ID)
+                self.state = 154
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
+            self.state = 155
             self.match(CSlangParser.COLON)
-            self.state = 78
+            self.state = 156
             self.match(CSlangParser.INT)
         except RecognitionException as re:
             localctx.exception = re
@@ -697,7 +1219,7 @@ class CSlangParser ( Parser ):
         return localctx
 
 
-    class Attr_decl_exp_valueContext(ParserRuleContext):
+    class Attr_decl_exp_fullContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -713,8 +1235,8 @@ class CSlangParser ( Parser ):
             else:
                 return self.getToken(CSlangParser.COMMA, i)
 
-        def attr_decl_exp_value(self):
-            return self.getTypedRuleContext(CSlangParser.Attr_decl_exp_valueContext,0)
+        def attr_decl_exp_full(self):
+            return self.getTypedRuleContext(CSlangParser.Attr_decl_exp_fullContext,0)
 
 
         def INT_LIT(self):
@@ -730,44 +1252,44 @@ class CSlangParser ( Parser ):
             return self.getToken(CSlangParser.DECL_OP, 0)
 
         def getRuleIndex(self):
-            return CSlangParser.RULE_attr_decl_exp_value
+            return CSlangParser.RULE_attr_decl_exp_full
 
 
 
 
-    def attr_decl_exp_value(self):
+    def attr_decl_exp_full(self):
 
-        localctx = CSlangParser.Attr_decl_exp_valueContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 18, self.RULE_attr_decl_exp_value)
+        localctx = CSlangParser.Attr_decl_exp_fullContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 34, self.RULE_attr_decl_exp_full)
         try:
-            self.state = 91
+            self.state = 169
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,8,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,13,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 80
+                self.state = 158
                 self.match(CSlangParser.ID)
-                self.state = 81
+                self.state = 159
                 self.match(CSlangParser.COMMA)
-                self.state = 82
-                self.attr_decl_exp_value()
-                self.state = 83
+                self.state = 160
+                self.attr_decl_exp_full()
+                self.state = 161
                 self.match(CSlangParser.COMMA)
-                self.state = 84
+                self.state = 162
                 self.match(CSlangParser.INT_LIT)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 86
+                self.state = 164
                 self.match(CSlangParser.ID)
-                self.state = 87
+                self.state = 165
                 self.match(CSlangParser.COLON)
-                self.state = 88
+                self.state = 166
                 self.match(CSlangParser.INT)
-                self.state = 89
+                self.state = 167
                 self.match(CSlangParser.DECL_OP)
-                self.state = 90
+                self.state = 168
                 self.match(CSlangParser.INT_LIT)
                 pass
 
@@ -801,10 +1323,10 @@ class CSlangParser ( Parser ):
     def stmt(self):
 
         localctx = CSlangParser.StmtContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 20, self.RULE_stmt)
+        self.enterRule(localctx, 36, self.RULE_stmt)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 93
+            self.state = 171
             self.assign_stmt()
         except RecognitionException as re:
             localctx.exception = re
@@ -844,17 +1366,238 @@ class CSlangParser ( Parser ):
     def assign_stmt(self):
 
         localctx = CSlangParser.Assign_stmtContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 22, self.RULE_assign_stmt)
+        self.enterRule(localctx, 38, self.RULE_assign_stmt)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 95
+            self.state = 173
             self.match(CSlangParser.ID)
-            self.state = 96
+            self.state = 174
             self.match(CSlangParser.ASSIGN_OP)
-            self.state = 97
+            self.state = 175
             self.exp()
-            self.state = 98
+            self.state = 176
             self.match(CSlangParser.SEMICOLON)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class Block_stmtContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def LCB(self):
+            return self.getToken(CSlangParser.LCB, 0)
+
+        def RCB(self):
+            return self.getToken(CSlangParser.RCB, 0)
+
+        def getRuleIndex(self):
+            return CSlangParser.RULE_block_stmt
+
+
+
+
+    def block_stmt(self):
+
+        localctx = CSlangParser.Block_stmtContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 40, self.RULE_block_stmt)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 178
+            self.match(CSlangParser.LCB)
+
+
+            self.state = 180
+            self.match(CSlangParser.RCB)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class Params_listContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def param(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(CSlangParser.ParamContext)
+            else:
+                return self.getTypedRuleContext(CSlangParser.ParamContext,i)
+
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSlangParser.COMMA)
+            else:
+                return self.getToken(CSlangParser.COMMA, i)
+
+        def params_same_type(self):
+            return self.getTypedRuleContext(CSlangParser.Params_same_typeContext,0)
+
+
+        def getRuleIndex(self):
+            return CSlangParser.RULE_params_list
+
+
+
+
+    def params_list(self):
+
+        localctx = CSlangParser.Params_listContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 42, self.RULE_params_list)
+        self._la = 0 # Token type
+        try:
+            self.state = 191
+            self._errHandler.sync(self)
+            la_ = self._interp.adaptivePredict(self._input,15,self._ctx)
+            if la_ == 1:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 182
+                self.param()
+                self.state = 187
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                while _la==CSlangParser.COMMA:
+                    self.state = 183
+                    self.match(CSlangParser.COMMA)
+                    self.state = 184
+                    self.param()
+                    self.state = 189
+                    self._errHandler.sync(self)
+                    _la = self._input.LA(1)
+
+                pass
+
+            elif la_ == 2:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 190
+                self.params_same_type()
+                pass
+
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ParamContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def ID(self):
+            return self.getToken(CSlangParser.ID, 0)
+
+        def COLON(self):
+            return self.getToken(CSlangParser.COLON, 0)
+
+        def INT(self):
+            return self.getToken(CSlangParser.INT, 0)
+
+        def getRuleIndex(self):
+            return CSlangParser.RULE_param
+
+
+
+
+    def param(self):
+
+        localctx = CSlangParser.ParamContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 44, self.RULE_param)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 193
+            self.match(CSlangParser.ID)
+            self.state = 194
+            self.match(CSlangParser.COLON)
+            self.state = 195
+            self.match(CSlangParser.INT)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class Params_same_typeContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def ID(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSlangParser.ID)
+            else:
+                return self.getToken(CSlangParser.ID, i)
+
+        def COLON(self):
+            return self.getToken(CSlangParser.COLON, 0)
+
+        def INT(self):
+            return self.getToken(CSlangParser.INT, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSlangParser.COMMA)
+            else:
+                return self.getToken(CSlangParser.COMMA, i)
+
+        def getRuleIndex(self):
+            return CSlangParser.RULE_params_same_type
+
+
+
+
+    def params_same_type(self):
+
+        localctx = CSlangParser.Params_same_typeContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 46, self.RULE_params_same_type)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 197
+            self.match(CSlangParser.ID)
+            self.state = 202
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while _la==CSlangParser.COMMA:
+                self.state = 198
+                self.match(CSlangParser.COMMA)
+                self.state = 199
+                self.match(CSlangParser.ID)
+                self.state = 204
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
+            self.state = 205
+            self.match(CSlangParser.COLON)
+            self.state = 206
+            self.match(CSlangParser.INT)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)

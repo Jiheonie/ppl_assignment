@@ -56,3 +56,33 @@ class ParserSuite(unittest.TestCase):
         _input = """1 + 2"""
         expect = "successful"
         self.assertTrue(TestParser.test(_input, expect, 311))
+
+    def test_constructor(self):
+        _input = """func A() {}"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 312))
+
+    def test_func(self):
+        _input = """func A(): int {}"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 313))
+
+    def test_func_param(self):
+        _input = """func A(a: int): int {}"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 314))
+
+    def test_func_params(self):
+        _input = """func A(a: int, b: int): int {}"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 315))
+
+    def test_static_func(self):
+        _input = """func @main(a: int, b: int): int {}"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 316))
+
+    def test_static_func(self):
+        _input = """class Program {func @main():int {}}"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 316))

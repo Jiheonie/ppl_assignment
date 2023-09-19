@@ -1,1 +1,1 @@
-var delta: int = 3;
+func A(a: int): int {}

@@ -1,1 +1,1 @@
-A class{}
+func A() {}

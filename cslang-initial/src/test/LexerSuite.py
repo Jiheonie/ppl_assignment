@@ -10,3 +10,4 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("1.2E-8", "1.2E-8,<EOF>", 104))
         self.assertTrue(TestLexer.test(""" "He asked me: \\"Where is John?\\"" """, "He asked me: \\\"Where is John?\\\",<EOF>", 105))
         self.assertTrue(TestLexer.test(""" "This is a string containing tab \t" """, "This is a string containing tab \t,<EOF>", 106))
+        self.assertTrue(TestLexer.test("@main", "@main,<EOF>", 107))
