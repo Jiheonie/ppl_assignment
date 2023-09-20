@@ -1,1 +1,8 @@
-class Program {func @main():int {}}
+
+        class Program {
+            func @main():int {
+                var r, s: int;
+                r := 2.0;
+            }
+        }
+        

@@ -1,1 +1,1 @@
-func A(a: int): int {}
+func A(a: int, b: int): int {}

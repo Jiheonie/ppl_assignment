@@ -11,3 +11,7 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test(""" "He asked me: \\"Where is John?\\"" """, "He asked me: \\\"Where is John?\\\",<EOF>", 105))
         self.assertTrue(TestLexer.test(""" "This is a string containing tab \t" """, "This is a string containing tab \t,<EOF>", 106))
         self.assertTrue(TestLexer.test("@main", "@main,<EOF>", 107))
+        self.assertTrue(TestLexer.test("// hello", "<EOF>", 108))
+        self.assertTrue(TestLexer.test("/* hello */", "<EOF>", 109))
+        self.assertTrue(TestLexer.test("/* This is a block comment so // has no meaning here */", "<EOF>", 110))
+        self.assertTrue(TestLexer.test("//This is a line comment so /* has no meaning here", "<EOF>", 111))

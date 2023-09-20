@@ -1,1 +1,1 @@
-func A(a: int, b: int): int {}
+func @main(a: int, b: int): int {}

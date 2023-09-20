@@ -48,7 +48,7 @@ class ParserSuite(unittest.TestCase):
         self.assertTrue(TestParser.test(_input, expect, 309))
 
     def test_attr_decl(self):
-        _input = """var a: int = 1;"""
+        _input = """var a: bool = false;"""
         expect = "successful"
         self.assertTrue(TestParser.test(_input, expect, 310))
 
@@ -67,22 +67,68 @@ class ParserSuite(unittest.TestCase):
         expect = "successful"
         self.assertTrue(TestParser.test(_input, expect, 313))
 
-    def test_func_param(self):
-        _input = """func A(a: int): int {}"""
-        expect = "successful"
-        self.assertTrue(TestParser.test(_input, expect, 314))
-
     def test_func_params(self):
         _input = """func A(a: int, b: int): int {}"""
         expect = "successful"
-        self.assertTrue(TestParser.test(_input, expect, 315))
+        self.assertTrue(TestParser.test(_input, expect, 314))
 
     def test_static_func(self):
         _input = """func @main(a: int, b: int): int {}"""
         expect = "successful"
-        self.assertTrue(TestParser.test(_input, expect, 316))
+        self.assertTrue(TestParser.test(_input, expect, 315))
 
-    def test_static_func(self):
-        _input = """class Program {func @main():int {}}"""
+    def test_class_static_func(self):
+        _input = """
+        class Program {
+            func @main():int {
+                var r, s: int;
+                r := 2.0;
+            }
+        }
+        """
         expect = "successful"
         self.assertTrue(TestParser.test(_input, expect, 316))
+
+    # def test_long_prog(self):
+    #     _input = """
+    #     class Shape {
+    #         var @numOfShape: int = 0;
+    #         const immutableAttribute: int = 0;
+    #         var length, width: int;
+    #         func @getNumOfShape():int {
+    #             return @numOfShape;
+    #         }
+    #     }
+    #     class Shape <- Retangle {
+    #         func getArea():int {
+    #             return self.length * self.width;
+    #         }
+    #     }
+    #     class Program {
+    #         func @main():void {
+    #             io.@writeInt(Shape.@numOfShape);
+    #         }
+    #     }
+    #     """
+    #     expect = "successful"
+    #     self.assertTrue(TestParser.test(_input, expect, 317))
+
+    def test_cmt_block(self):
+        _input = """a := 5;//this is a line comment"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 318))
+
+    def test_array(self):
+        _input = """[1 + 2, 3, true, 1.2, "hwng", abc, [1, 2]]"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 319))
+
+    def test_decl_array(self):
+        _input = """var a: [5]int = [1 + 2, 3, true, 1.2, "hwng", abc, [1, 2]];"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 320))
+
+    def test_obj_decl(self):
+        _input = """a := new X();"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 321))
