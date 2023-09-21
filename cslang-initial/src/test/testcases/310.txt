@@ -1,1 +1,1 @@
-var a: bool = false;
+var @a: bool = false;

@@ -1,1 +1,1 @@
-const width: int;
+if {i := 0;} j > i {j := j - 1;}

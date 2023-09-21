@@ -48,7 +48,7 @@ class ParserSuite(unittest.TestCase):
         self.assertTrue(TestParser.test(_input, expect, 309))
 
     def test_attr_decl(self):
-        _input = """var a: bool = false;"""
+        _input = """var @a: bool = false;"""
         expect = "successful"
         self.assertTrue(TestParser.test(_input, expect, 310))
 
@@ -129,6 +129,42 @@ class ParserSuite(unittest.TestCase):
         self.assertTrue(TestParser.test(_input, expect, 320))
 
     def test_obj_decl(self):
-        _input = """a := new X();"""
+        _input = """a := new X(1, a + b);"""
         expect = "successful"
         self.assertTrue(TestParser.test(_input, expect, 321))
+
+    def test_func_call(self):
+        _input = """x := A(1 + 2, 2 + 1);"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 322))
+
+    def test_arr_ele(self):
+        _input = """x := A[1];"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 323))
+
+    def test_if_stmt(self):
+        _input = """if {i := 0;} j > i {j := j - 1;}"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 324))
+        
+    def test_if_stmt2(self):
+        _input = """if n == 0 {return 1;}
+            else {return n * @fact(n - 1);}"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 325))
+
+    def test_for_stmt(self):
+        _input = """for i := 0; i < 10; i := i + 1 {}"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 326))
+
+    def test_method_invocation(self):
+        _input = """Shape.@getNumOfShape();"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 327))
+
+    def test_return(self):
+        _input = """return true;"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 328))
