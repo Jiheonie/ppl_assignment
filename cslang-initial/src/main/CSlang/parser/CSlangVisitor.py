@@ -254,13 +254,8 @@ class CSlangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by CSlangParser#param.
-    def visitParam(self, ctx:CSlangParser.ParamContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by CSlangParser#params_same_type.
-    def visitParams_same_type(self, ctx:CSlangParser.Params_same_typeContext):
+    # Visit a parse tree produced by CSlangParser#params_1_type.
+    def visitParams_1_type(self, ctx:CSlangParser.Params_1_typeContext):
         return self.visitChildren(ctx)
 
 

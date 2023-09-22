@@ -89,29 +89,29 @@ class ParserSuite(unittest.TestCase):
         expect = "successful"
         self.assertTrue(TestParser.test(_input, expect, 316))
 
-    # def test_long_prog(self):
-    #     _input = """
-    #     class Shape {
-    #         var @numOfShape: int = 0;
-    #         const immutableAttribute: int = 0;
-    #         var length, width: int;
-    #         func @getNumOfShape():int {
-    #             return @numOfShape;
-    #         }
-    #     }
-    #     class Shape <- Retangle {
-    #         func getArea():int {
-    #             return self.length * self.width;
-    #         }
-    #     }
-    #     class Program {
-    #         func @main():void {
-    #             io.@writeInt(Shape.@numOfShape);
-    #         }
-    #     }
-    #     """
-    #     expect = "successful"
-    #     self.assertTrue(TestParser.test(_input, expect, 317))
+    def test_long_prog1(self):
+        _input = """
+        class Shape {
+            var @numOfShape: int = 0;
+            const immutableAttribute: int = 0;
+            var length, width: int;
+            func @getNumOfShape():int {
+                return @numOfShape;
+            }
+        }
+        class Shape <- Retangle {
+            func getArea():int {
+                return self.length * self.width;
+            }
+        }
+        class Program {
+            func @main():void {
+                io.@writeInt(Shape.@numOfShape);
+            }
+        }
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 317))
 
     def test_cmt_block(self):
         _input = """a := 5;//this is a line comment"""
@@ -168,3 +168,27 @@ class ParserSuite(unittest.TestCase):
         _input = """return true;"""
         expect = "successful"
         self.assertTrue(TestParser.test(_input, expect, 328))
+
+    def test_long_prog2(self):
+        _input = """
+        class Shape {
+        var @numOfShape: int = 0;
+        const immutableAttribute: int = 0;
+        var length, width: int;
+        func @getNumOfShape():int {
+        return @numOfShape;
+        }
+        }
+        class Shape <- Retangle {
+        func getArea():int {
+        return self.length * self.width;
+        }
+        }
+        class Program {
+        func @main():void {
+        io.@writeInt(Shape.@numOfShape);
+        }
+        }
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 329))

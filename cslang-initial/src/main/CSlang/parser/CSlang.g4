@@ -19,10 +19,6 @@ ELSE: 'else';
 
 FOR: 'for';
 
-// TRUE: 'true';
-
-// FALSE: 'false';
-
 INT: 'int';
 
 FLOAT: 'float';
@@ -58,9 +54,7 @@ SUB_OP: '-';
 
 MUL_OP: '*';
 
-SLASH: '/';
-
-BACKSLASH: '\\';
+DIV_OP: '/';
 
 NOT_OP: '!';
 
@@ -129,7 +123,7 @@ exp1:
 	| exp2;
 exp2: exp2 (AND_OP | OR_OP) exp3 | exp3;
 exp3: exp3 (ADD_OP | SUB_OP) exp4 | exp4;
-exp4: exp4 (MUL_OP | SLASH | BACKSLASH | MOD_OP) exp5 | exp5;
+exp4: exp4 (MUL_OP | DIV_OP | '\\' | MOD_OP) exp5 | exp5;
 exp5: NOT_OP exp5 | exp6;
 exp6: SUB_OP exp6 | exp7;
 exp7: arr_ele | exp8;
@@ -153,7 +147,7 @@ array_type: LSB INT_LIT RSB value_type;
 decl: class_decl | attr_decl | method_decl;
 
 // class declarations
-class_decl: CLASS ID ('<-' ID)? LCB (stmt | decl)* RCB;
+class_decl: CLASS (ID '<-')? ID LCB (stmt | decl)* RCB;
 
 static_access: static_mem_access | static_method_access;
 
@@ -187,7 +181,6 @@ expo_constructor: LP params_list? RP block_stmt;
 func_call: (ID | AT_ID) LP exp_list? RP;
 
 // attribute declarations 
-// ??????????? string index out of range
 attr_decl: (VAR | CONST) attr_decl_body SEMICOLON;
 attr_decl_body: attr_decl_body_full | attr_decl_body_short;
 attr_decl_body_short: (ID | AT_ID) (COMMA (ID | AT_ID))* COLON ref_type;
@@ -200,7 +193,7 @@ stmt:
 	assign_stmt SEMICOLON
 	| if_stmt
 	| for_stmt
-	| break_stmt 
+	| break_stmt
 	| continue_stmt
 	| return_stmt
 	| method_invocation_stmt;
@@ -225,9 +218,8 @@ block_stmt: LCB body RCB;
 // body: stmt body | decl body |;
 body: (stmt | decl)*;
 
-params_list: param (COMMA param)* | params_same_type;
-param: ID COLON ref_type;
-params_same_type: ID (COMMA ID)* COLON ref_type;
+params_list: params_1_type (COMMA params_1_type)*;
+params_1_type: ID (COMMA ID)* COLON ref_type;
 
 // Literals
 array_lit: LSB exp_list? RSB;
@@ -238,14 +230,21 @@ FLOAT_LIT: INT_LIT DECPART | INT_LIT DECPART? EXPPART;
 fragment DECPART: DOT [0-9]*;
 fragment EXPPART: [eE] [+-]? INT_LIT;
 
-INT_LIT: ([0-9]+) { 
-	while self.text[0] == '0':
-		self.text = self.text[1:]
-};
+INT_LIT: ([0-9]+);
 
-STR_LIT: (DOU_Q (~["] | BACKSLASH DOU_Q)* DOU_Q) {
+STR_LIT:
+	DOU_Q (~["\\] | ESCAPE)* DOU_Q {
 	self.text = self.text[1:-1]
 };
+fragment NEWLINE: '\r'? '\n';
+fragment ESCAPE:
+	'\\b'
+	| '\\f'
+	| '\\r'
+	| '\\n'
+	| '\\t'
+	| '\\"'
+	| '\\\\';
 
 BOOL_LIT: 'true' | 'false';
 
@@ -262,5 +261,21 @@ WS: [ \t\r\n\f\b]+ -> skip;
 // skip spaces, tabs, newlines
 
 ERROR_CHAR: . {raise ErrorToken(self.text)};
-UNCLOSE_STRING: .;
-ILLEGAL_ESCAPE: .;
+
+ILLEGAL_ESCAPE:
+	DOU_Q (~["] | '\\"')* DOU_Q {
+	esc_list = ['b', 'f', 'r', 'n', 't', '"', '\\']
+	for idx in range(1, len(self.text) - 2):
+		if self.text[idx] == '\\' and self.text[idx+1] not in esc_list:
+			raise IllegalEscape(self.text[1:-1]) 
+			break
+};
+
+UNCLOSE_STRING:
+	DOU_Q (~["] | ESCAPE)*? (NEWLINE | EOF) {
+	string_error = self.text[1:]
+	if (string_error[-1] == "\n"):
+		raise UncloseString(self.text[1:-1])
+	else:
+		raise UncloseString(self.text[1:])
+};
