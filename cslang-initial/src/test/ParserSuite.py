@@ -57,9 +57,9 @@ class ParserSuite(unittest.TestCase):
         expect = "successful"
         self.assertTrue(TestParser.test(_input, expect, 311))
 
-    def test_constructor(self):
+    def test_wrong_constructor(self):
         _input = """func A() {}"""
-        expect = "successful"
+        expect = "Error on line 1 col 9: {"
         self.assertTrue(TestParser.test(_input, expect, 312))
 
     def test_func(self):
@@ -124,7 +124,8 @@ class ParserSuite(unittest.TestCase):
         self.assertTrue(TestParser.test(_input, expect, 319))
 
     def test_decl_array(self):
-        _input = """var a: [5]int = [1 + 2, 3, true, 1.2, "hwng", abc, [1, 2]];"""
+        _input = """var a: [5]int = [1 + 2, 3, true, 1.2, "hwng", abc, [1, 2]];
+        var b: [5]int = [];"""
         expect = "successful"
         self.assertTrue(TestParser.test(_input, expect, 320))
 
@@ -135,7 +136,7 @@ class ParserSuite(unittest.TestCase):
 
     def test_func_call(self):
         _input = """x := A(1 + 2, 2 + 1);"""
-        expect = "successful"
+        expect = "Error on line 1 col 6: ("
         self.assertTrue(TestParser.test(_input, expect, 322))
 
     def test_arr_ele(self):
@@ -172,23 +173,69 @@ class ParserSuite(unittest.TestCase):
     def test_long_prog2(self):
         _input = """
         class Shape {
-        var @numOfShape: int = 0;
-        const immutableAttribute: int = 0;
-        var length, width: int;
-        func @getNumOfShape():int {
-        return @numOfShape;
-        }
+            var @numOfShape: int = 0;
+            const immutableAttribute: int = 0;
+            var length, width: int;
+            func @getNumOfShape():int {
+                return @numOfShape;
+            }
         }
         class Shape <- Retangle {
-        func getArea():int {
-        return self.length * self.width;
-        }
+            func getArea():int {
+                return self.length * self.width;
+            }
         }
         class Program {
-        func @main():void {
-        io.@writeInt(Shape.@numOfShape);
-        }
+            func @main():void {
+                io.@writeInt(Shape.@numOfShape);
+            }
         }
         """
         expect = "successful"
         self.assertTrue(TestParser.test(_input, expect, 329))
+
+    def test_params_multiple(self):
+        _input = """func functi(a,b,c: int, d: int): void {}"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 330))
+
+    def test_invalid_id(self):
+        _input = """var 1abc: int = 1;"""
+        expect = "Error on line 1 col 4: 1"
+        self.assertTrue(TestParser.test(_input, expect, 331))
+
+    def test_arr_ele1(self):
+        _input = """a[3+x.foo(2)] := a[b[2]] +3;"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 332))
+
+    def test_arr_ele2(self):
+        _input = """x.b[2] := x.m()[3];"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 333))
+
+    def test_attr_decl1(self):
+        _input = """const My1stCons, My2ndCons: int = 1 + 5, 2;
+        var @x, @y : int = 0, 0;"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 334))
+
+    def test_class_with_self1(self):
+        _input = """
+        class Program {
+            var a: int = 1;    
+        
+            func constructor() {
+                x := #self.a;
+            }
+        }
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 335))
+
+    def test_assign_stmt1(self):
+        _input = """#self.aPI := 3.14;
+        value := x.foo(5);
+        l[3] := value * 2;"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(_input, expect, 336))

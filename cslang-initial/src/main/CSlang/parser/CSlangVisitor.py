@@ -14,6 +14,16 @@ class CSlangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by CSlangParser#prog_decl_list.
+    def visitProg_decl_list(self, ctx:CSlangParser.Prog_decl_listContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CSlangParser#prog_decl.
+    def visitProg_decl(self, ctx:CSlangParser.Prog_declContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by CSlangParser#exp.
     def visitExp(self, ctx:CSlangParser.ExpContext):
         return self.visitChildren(ctx)
@@ -64,6 +74,11 @@ class CSlangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by CSlangParser#exp10.
+    def visitExp10(self, ctx:CSlangParser.Exp10Context):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by CSlangParser#literal.
     def visitLiteral(self, ctx:CSlangParser.LiteralContext):
         return self.visitChildren(ctx)
@@ -71,6 +86,11 @@ class CSlangVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by CSlangParser#exp_list.
     def visitExp_list(self, ctx:CSlangParser.Exp_listContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CSlangParser#exp_prime.
+    def visitExp_prime(self, ctx:CSlangParser.Exp_primeContext):
         return self.visitChildren(ctx)
 
 
@@ -104,13 +124,13 @@ class CSlangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by CSlangParser#static_access.
-    def visitStatic_access(self, ctx:CSlangParser.Static_accessContext):
+    # Visit a parse tree produced by CSlangParser#class_mem_list.
+    def visitClass_mem_list(self, ctx:CSlangParser.Class_mem_listContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by CSlangParser#inst_access.
-    def visitInst_access(self, ctx:CSlangParser.Inst_accessContext):
+    # Visit a parse tree produced by CSlangParser#class_mem.
+    def visitClass_mem(self, ctx:CSlangParser.Class_memContext):
         return self.visitChildren(ctx)
 
 
@@ -124,18 +144,48 @@ class CSlangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by CSlangParser#static_mem_access.
-    def visitStatic_mem_access(self, ctx:CSlangParser.Static_mem_accessContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by CSlangParser#method_access.
     def visitMethod_access(self, ctx:CSlangParser.Method_accessContext):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by CSlangParser#inst_mem_access.
+    def visitInst_mem_access(self, ctx:CSlangParser.Inst_mem_accessContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CSlangParser#inst_method_access.
+    def visitInst_method_access(self, ctx:CSlangParser.Inst_method_accessContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CSlangParser#static_access.
+    def visitStatic_access(self, ctx:CSlangParser.Static_accessContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CSlangParser#static_mem_access.
+    def visitStatic_mem_access(self, ctx:CSlangParser.Static_mem_accessContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by CSlangParser#static_method_access.
     def visitStatic_method_access(self, ctx:CSlangParser.Static_method_accessContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CSlangParser#self_access.
+    def visitSelf_access(self, ctx:CSlangParser.Self_accessContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CSlangParser#self_mem_access.
+    def visitSelf_mem_access(self, ctx:CSlangParser.Self_mem_accessContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CSlangParser#self_method_access.
+    def visitSelf_method_access(self, ctx:CSlangParser.Self_method_accessContext):
         return self.visitChildren(ctx)
 
 
@@ -164,21 +214,6 @@ class CSlangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by CSlangParser#static_constructor_decl.
-    def visitStatic_constructor_decl(self, ctx:CSlangParser.Static_constructor_declContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by CSlangParser#expo_constructor.
-    def visitExpo_constructor(self, ctx:CSlangParser.Expo_constructorContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by CSlangParser#func_call.
-    def visitFunc_call(self, ctx:CSlangParser.Func_callContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by CSlangParser#attr_decl.
     def visitAttr_decl(self, ctx:CSlangParser.Attr_declContext):
         return self.visitChildren(ctx)
@@ -196,6 +231,11 @@ class CSlangVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by CSlangParser#attr_decl_body_full.
     def visitAttr_decl_body_full(self, ctx:CSlangParser.Attr_decl_body_fullContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CSlangParser#identifier_list.
+    def visitIdentifier_list(self, ctx:CSlangParser.Identifier_listContext):
         return self.visitChildren(ctx)
 
 
@@ -251,6 +291,11 @@ class CSlangVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by CSlangParser#params_list.
     def visitParams_list(self, ctx:CSlangParser.Params_listContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CSlangParser#params_prime.
+    def visitParams_prime(self, ctx:CSlangParser.Params_primeContext):
         return self.visitChildren(ctx)
 
 

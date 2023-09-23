@@ -37,7 +37,7 @@ CONSTRUCTOR: 'constructor';
 
 VAR: 'var';
 
-SELF: 'self';
+SELF: '#self';
 
 NEW: 'new';
 
@@ -107,7 +107,11 @@ SIN_Q: '\'';
 DOU_Q: '"';
 
 // main program
-program: (exp | stmt | decl)+ EOF;
+program: prog_decl_list EOF;
+
+// program can null-able???
+prog_decl_list: prog_decl prog_decl_list | prog_decl;
+prog_decl: exp | stmt | decl;
 
 // expressions (priority from low to high)
 exp: exp1 CONCAT_OP exp1 | exp1;
@@ -127,66 +131,68 @@ exp4: exp4 (MUL_OP | DIV_OP | '\\' | MOD_OP) exp5 | exp5;
 exp5: NOT_OP exp5 | exp6;
 exp6: SUB_OP exp6 | exp7;
 exp7: arr_ele | exp8;
-exp8: inst_access | static_access | exp9;
-exp9: obj_cre | literal | LP (exp) RP | ID | func_call;
+exp8: exp8 DOT ID | exp8 DOT ID LP exp_list RP | exp9;
+exp9: static_access | exp10;
+exp10: obj_cre | literal | LP (exp) RP | ID | self_mem_access;
 
 literal: INT_LIT | FLOAT_LIT | STR_LIT | BOOL_LIT | array_lit;
 
-exp_list: exp (COMMA exp)*;
+exp_list: exp_prime |;
+exp_prime: exp COMMA exp_prime | exp;
 
 // types
 func_type: ref_type | VOID;
 
-ref_type: value_type | array_type;
+ref_type: ele_type | array_type;
 
-value_type: INT | FLOAT | STRING | BOOL;
+ele_type: INT | FLOAT | STRING | BOOL;
 
-array_type: LSB INT_LIT RSB value_type;
+array_type: LSB INT_LIT RSB ele_type;
 
 // declarations
 decl: class_decl | attr_decl | method_decl;
 
 // class declarations
-class_decl: CLASS (ID '<-')? ID LCB (stmt | decl)* RCB;
+class_decl: CLASS (ID '<-')? ID LCB class_mem_list RCB;
+
+class_mem_list: class_mem class_mem_list |;
+class_mem: attr_decl | method_decl;
+
+obj_cre: NEW ID LP exp_list RP;
+
+mem_access: inst_mem_access | static_mem_access | self_mem_access;
+method_access: inst_method_access | static_method_access | self_method_access;
+
+inst_mem_access: exp8 DOT ID;
+inst_method_access: exp8 DOT ID LP exp_list RP;
 
 static_access: static_mem_access | static_method_access;
-
-inst_access: mem_access | method_access;
-
-obj_cre: NEW ID LP exp_list? RP;
-
-mem_access: (exp9 | SELF) DOT ID;
-
 static_mem_access: (ID DOT)? AT_ID;
+static_method_access: (ID DOT)? AT_ID LP exp_list RP;
 
-method_access: (exp9 | SELF) DOT ID LP exp_list? RP;
-
-static_method_access: (ID DOT)? AT_ID LP exp_list? RP;
+self_access: self_mem_access | self_method_access;
+self_mem_access: SELF DOT (ID | AT_ID);
+self_method_access: SELF DOT (ID | AT_ID) LP exp_list RP;
 
 // method declarations
-method_decl:
-	func_decl
-	| constructor_decl
-	| static_func_decl
-	| static_constructor_decl;
+method_decl: func_decl | constructor_decl | static_func_decl;
 
 func_decl: FUNC ID expo_func;
 static_func_decl: FUNC AT_ID expo_func;
-expo_func: LP params_list? RP COLON func_type block_stmt;
+expo_func: LP params_list RP COLON func_type block_stmt;
 
-constructor_decl: FUNC ID expo_constructor;
-static_constructor_decl: FUNC AT_ID expo_constructor;
-expo_constructor: LP params_list? RP block_stmt;
-
-func_call: (ID | AT_ID) LP exp_list? RP;
+constructor_decl: FUNC CONSTRUCTOR LP params_list RP block_stmt;
 
 // attribute declarations 
 attr_decl: (VAR | CONST) attr_decl_body SEMICOLON;
 attr_decl_body: attr_decl_body_full | attr_decl_body_short;
-attr_decl_body_short: (ID | AT_ID) (COMMA (ID | AT_ID))* COLON ref_type;
+attr_decl_body_short: identifier_list COLON ref_type;
 attr_decl_body_full:
 	(ID | AT_ID) COMMA attr_decl_body_full COMMA exp
 	| (ID | AT_ID) COLON ref_type DECL_OP exp;
+
+identifier_list: (ID | AT_ID) COMMA identifier_list
+	| (ID | AT_ID);
 
 // statements
 stmt:
@@ -196,9 +202,10 @@ stmt:
 	| break_stmt
 	| continue_stmt
 	| return_stmt
-	| method_invocation_stmt;
+	| method_invocation_stmt
+	| attr_decl;
 
-assign_stmt: exp ASSIGN_OP exp;
+assign_stmt: exp7 ASSIGN_OP exp;
 
 if_stmt: IF block_stmt? exp block_stmt (ELSE block_stmt)?;
 
@@ -211,20 +218,24 @@ continue_stmt: CONTINUE SEMICOLON;
 
 return_stmt: RETURN exp? SEMICOLON;
 
-method_invocation_stmt: (method_access | static_method_access) SEMICOLON;
+method_invocation_stmt: (
+		inst_method_access
+		| static_method_access
+		| self_method_access
+	) SEMICOLON;
 
 block_stmt: LCB body RCB;
 
-// body: stmt body | decl body |;
-body: (stmt | decl)*;
+body: stmt body |;
 
-params_list: params_1_type (COMMA params_1_type)*;
-params_1_type: ID (COMMA ID)* COLON ref_type;
+params_list: params_prime |;
+params_prime: params_1_type COMMA params_prime | params_1_type;
+params_1_type: identifier_list COLON ref_type;
 
 // Literals
-array_lit: LSB exp_list? RSB;
+array_lit: LSB exp_list RSB;
 
-arr_ele: ID LSB exp8 RSB;
+arr_ele: exp8 LSB exp RSB;
 
 FLOAT_LIT: INT_LIT DECPART | INT_LIT DECPART? EXPPART;
 fragment DECPART: DOT [0-9]*;
