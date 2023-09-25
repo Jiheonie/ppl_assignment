@@ -1,2 +1,2 @@
 print(""" " """)
-print(" \" ")
+print("\\\\n hello\t")

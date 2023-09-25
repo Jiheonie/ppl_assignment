@@ -201,7 +201,7 @@ func_decl: FUNC ID expo_func;
 static_func_decl: FUNC AT_ID expo_func;
 expo_func: LP params_list RP COLON func_type block_stmt;
 
-main_func_decl: FUNC MAIN LP RP COLON VOID block_stmt;
+main_func_decl: FUNC MAIN LP RP COLON (VOID | INT) block_stmt;
 
 constructor_decl: FUNC CONSTRUCTOR LP params_list RP block_stmt;
 
@@ -263,7 +263,12 @@ FLOAT_LIT: INT_LIT DECPART | INT_LIT DECPART? EXPPART;
 fragment DECPART: DOT [0-9]*;
 fragment EXPPART: [eE] [+-]? INT_LIT;
 
-INT_LIT: ([0-9]+);
+INT_LIT: ([0-9]+) {
+	for i in self.text:
+		if i != '0' or self.text == '0':
+			break
+		self.text = self.text[1:] 
+};
 
 STR_LIT:
 	DOU_Q (~["\\] | ESCAPE)* DOU_Q {

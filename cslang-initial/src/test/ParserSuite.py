@@ -389,8 +389,10 @@ class ParserSuite(unittest.TestCase):
     def test_invalid_main_123789401389(self):
         _input = """
         class A {
-            func @main(): void {}
+            func @main(): int {}
         }
         """
         expect = "Error on line 3 col 17: @main"
         self.assertTrue(TestParser.test(_input, expect, 351)) 
+
+    # def test

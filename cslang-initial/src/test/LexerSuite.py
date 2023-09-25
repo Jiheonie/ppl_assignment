@@ -48,7 +48,7 @@ class LexerSuite(unittest.TestCase):
 
     def test12_int(self):
         """test identifiers"""
-        self.assertTrue(TestLexer.test("01234", "01234,<EOF>", 112))   
+        self.assertTrue(TestLexer.test("01234", "1234,<EOF>", 112))   
 
     def test13_errortoken(self):
         """test identifiers"""
@@ -81,7 +81,7 @@ class LexerSuite(unittest.TestCase):
 
     def test20_string(self):
         """test identifiers"""
-        self.assertTrue(TestLexer.test(""" \"this is a string \\\\\" """, "Unclosed String: this is a string \\\\\" ", 120))
+        self.assertTrue(TestLexer.test(""" "this is a string \\\\" """, "Unclosed String: this is a string \\\\\" ", 120))
 
     def test21_float(self):
         """test identifiers"""
@@ -238,7 +238,7 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("inherit out _a1 : integer", "inherit,out,_a1,:,integer,<EOF>", 171))
     
     def test72_random(self):
-        self.assertTrue(TestLexer.test("{\"Na\", \"Sa\", \"Sa\"}", "{,Na,,,Sa,,,Sa,},<EOF>", 172))
+        self.assertTrue(TestLexer.test("    {\"Na\", \"Sa\", \"Sa\"}", "{,Na,,,Sa,,,Sa,},<EOF>", 172))
 
     def test73_random(self):
         self.assertTrue(TestLexer.test("a,b:array [5, 5] of integer", "a,,,b,:,array,[,5,,,5,],of,integer,<EOF>", 173))
@@ -359,7 +359,7 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("""143e""", "143,e,<EOF>", 210))
 
     def test111_unclosed_str(self):
-        self.assertTrue(TestLexer.test(""" "illegally escaped\a """, "Unclosed String: illegally escaped\a ", 211))
+        self.assertTrue(TestLexer.test(""" "illegally escaped\\a """, "Unclosed String: illegally escaped\\a ", 211))
 
     def test112_illegal_esc(self):
         self.assertTrue(TestLexer.test(""" "illegally escaped\k " """, "Illegal Escape In String: illegally escaped\k", 212))
@@ -390,3 +390,20 @@ class LexerSuite(unittest.TestCase):
 
     def test121_ill_esc(self):
         self.assertTrue(TestLexer.test(""" "illegally escaped\mx" """, "Illegal Escape In String: illegally escaped\m", 221))
+
+    def test122_op(self):
+        self.assertTrue(TestLexer.test(""" ><=>=<>= """, ">,<=,>=,<,>=,<EOF>", 222))
+
+    def test123_esc(self):
+        self.assertTrue(TestLexer.test(""" "\nhello\t" """, "\n\nhello\t,<EOF>", 223))
+
+    def test124_esc(self):
+        self.assertTrue(TestLexer.test(""" "\\nhello\t" """, "\\nhello\t,<EOF>", 224))
+
+    def test125_esc(self):
+        self.assertTrue(TestLexer.test(""" "\\\nhello\t" """, "Illegal Escape In String: \\\n", 225))
+
+    def test126_esc(self):
+        self.assertTrue(TestLexer.test(""" "\\\\nhello\t" """, "\\\\nhello\t,<EOF>", 226))
+
+    

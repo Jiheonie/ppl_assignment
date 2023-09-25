@@ -1,1 +1,1 @@
-Unclosed String: illegally escaped 
+Unclosed String: illegally escaped\a 
