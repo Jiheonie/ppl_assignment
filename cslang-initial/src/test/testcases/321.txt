@@ -1,1 +1,1 @@
-a := new X(1, a + b);
+class A <- B{a := new X(1, a + b);}

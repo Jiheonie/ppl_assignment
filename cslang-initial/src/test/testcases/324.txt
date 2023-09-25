@@ -1,1 +1,1 @@
-if {i := 0;} j > i {j := j - 1;}
+class A {if {i := 0;} j > i {j := j - 1;}}

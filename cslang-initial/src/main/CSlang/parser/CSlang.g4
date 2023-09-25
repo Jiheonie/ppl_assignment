@@ -9,6 +9,10 @@ options {
 }
 
 // keywords
+PROGRAM_CLASS: 'Program';
+
+MAIN: '@main';
+
 BREAK: 'break';
 
 CONTINUE: 'continue';
@@ -37,7 +41,7 @@ CONSTRUCTOR: 'constructor';
 
 VAR: 'var';
 
-SELF: '#self';
+SELF: 'self';
 
 NEW: 'new';
 
@@ -111,7 +115,6 @@ program: prog_decl_list EOF;
 
 // program can null-able???
 prog_decl_list: prog_decl prog_decl_list | prog_decl;
-prog_decl: exp | stmt | decl;
 
 // expressions (priority from low to high)
 exp: exp1 CONCAT_OP exp1 | exp1;
@@ -133,7 +136,13 @@ exp6: SUB_OP exp6 | exp7;
 exp7: arr_ele | exp8;
 exp8: exp8 DOT ID | exp8 DOT ID LP exp_list RP | exp9;
 exp9: static_access | exp10;
-exp10: obj_cre | literal | LP (exp) RP | ID | self_mem_access;
+exp10:
+	obj_cre
+	| literal
+	| LP (exp) RP
+	| ID
+	| self_mem_access
+	| NULL;
 
 literal: INT_LIT | FLOAT_LIT | STR_LIT | BOOL_LIT | array_lit;
 
@@ -150,18 +159,29 @@ ele_type: INT | FLOAT | STRING | BOOL;
 array_type: LSB INT_LIT RSB ele_type;
 
 // declarations
-decl: class_decl | attr_decl | method_decl;
+prog_decl: class_decl | program_class_decl;
 
 // class declarations
 class_decl: CLASS (ID '<-')? ID LCB class_mem_list RCB;
+program_class_decl:
+	CLASS PROGRAM_CLASS LCB prog_class_mem_list RCB;
 
 class_mem_list: class_mem class_mem_list |;
 class_mem: attr_decl | method_decl;
 
+prog_class_mem_list: prog_class_mem prog_class_mem_list |;
+prog_class_mem: class_mem | main_func_decl;
+
 obj_cre: NEW ID LP exp_list RP;
 
-mem_access: inst_mem_access | static_mem_access | self_mem_access;
-method_access: inst_method_access | static_method_access | self_method_access;
+mem_access:
+	inst_mem_access
+	| static_mem_access
+	| self_mem_access;
+method_access:
+	inst_method_access
+	| static_method_access
+	| self_method_access;
 
 inst_mem_access: exp8 DOT ID;
 inst_method_access: exp8 DOT ID LP exp_list RP;
@@ -180,6 +200,8 @@ method_decl: func_decl | constructor_decl | static_func_decl;
 func_decl: FUNC ID expo_func;
 static_func_decl: FUNC AT_ID expo_func;
 expo_func: LP params_list RP COLON func_type block_stmt;
+
+main_func_decl: FUNC MAIN LP RP COLON VOID block_stmt;
 
 constructor_decl: FUNC CONSTRUCTOR LP params_list RP block_stmt;
 
@@ -278,7 +300,7 @@ ILLEGAL_ESCAPE:
 	esc_list = ['b', 'f', 'r', 'n', 't', '"', '\\']
 	for idx in range(1, len(self.text) - 2):
 		if self.text[idx] == '\\' and self.text[idx+1] not in esc_list:
-			raise IllegalEscape(self.text[1:-1]) 
+			raise IllegalEscape(self.text[1:idx + 2]) 
 			break
 };
 

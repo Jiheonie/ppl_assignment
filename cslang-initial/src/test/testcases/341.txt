@@ -1,0 +1,7 @@
+class A {func constructor() {
+        var r, s: int;
+        r := 2.0;
+        var a, b: [5]int;
+        s := r * r * self.myPI;
+        a[0] := s;
+        }}

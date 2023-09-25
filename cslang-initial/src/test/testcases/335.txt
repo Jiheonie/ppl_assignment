@@ -3,7 +3,7 @@
             var a: int = 1;    
         
             func constructor() {
-                x := #self.a;
+                x := self.a;
             }
         }
         

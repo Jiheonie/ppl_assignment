@@ -1,1 +1,1 @@
-a \\ b,<EOF>
+this is a string \r,<EOF>

@@ -1,1 +1,1 @@
-func A() {}
+class A <- B{func A() {}}

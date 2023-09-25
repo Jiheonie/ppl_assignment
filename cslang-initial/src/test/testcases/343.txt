@@ -1,0 +1,6 @@
+
+        class Program {
+            var a,b,c:int
+            func @main(n: int): int {}
+        }
+        

@@ -1,1 +1,1 @@
-func functi(a,b,c: int, d: int): void {}
+class A <- B{func functi(a,b,c: int, d: int): void {}}

@@ -1,1 +1,1 @@
-Illegal Escape In String: abc \k
+01234,<EOF>

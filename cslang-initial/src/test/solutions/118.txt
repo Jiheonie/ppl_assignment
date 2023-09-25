@@ -1,1 +1,1 @@
-1234,<EOF>
+this is a string \f,<EOF>

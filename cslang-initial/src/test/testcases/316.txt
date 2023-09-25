@@ -1,6 +1,6 @@
 
         class Program {
-            func @main():int {
+            func @main():void {
                 var r, s: int;
                 r := 2.0;
             }

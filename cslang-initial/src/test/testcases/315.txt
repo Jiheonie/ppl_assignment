@@ -1,1 +1,1 @@
-func @main(a: int, b: int): int {}
+class Program {func @main(): void {}}

@@ -1,1 +1,1 @@
-Illegal Escape In String: a \ b
+128,e,+,+,42,<EOF>

@@ -1,1 +1,1 @@
-var width: int;
+class A <- B{var width: int;}

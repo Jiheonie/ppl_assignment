@@ -1,1 +1,1 @@
-x.b[2] := x.m()[3];
+class A <- B{func A(): int {x.b[2] := x.m()[3];}}

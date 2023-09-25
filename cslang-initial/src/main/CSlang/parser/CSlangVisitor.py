@@ -19,11 +19,6 @@ class CSlangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by CSlangParser#prog_decl.
-    def visitProg_decl(self, ctx:CSlangParser.Prog_declContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by CSlangParser#exp.
     def visitExp(self, ctx:CSlangParser.ExpContext):
         return self.visitChildren(ctx)
@@ -104,8 +99,8 @@ class CSlangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by CSlangParser#value_type.
-    def visitValue_type(self, ctx:CSlangParser.Value_typeContext):
+    # Visit a parse tree produced by CSlangParser#ele_type.
+    def visitEle_type(self, ctx:CSlangParser.Ele_typeContext):
         return self.visitChildren(ctx)
 
 
@@ -114,13 +109,18 @@ class CSlangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by CSlangParser#decl.
-    def visitDecl(self, ctx:CSlangParser.DeclContext):
+    # Visit a parse tree produced by CSlangParser#prog_decl.
+    def visitProg_decl(self, ctx:CSlangParser.Prog_declContext):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by CSlangParser#class_decl.
     def visitClass_decl(self, ctx:CSlangParser.Class_declContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CSlangParser#program_class_decl.
+    def visitProgram_class_decl(self, ctx:CSlangParser.Program_class_declContext):
         return self.visitChildren(ctx)
 
 
@@ -131,6 +131,16 @@ class CSlangVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by CSlangParser#class_mem.
     def visitClass_mem(self, ctx:CSlangParser.Class_memContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CSlangParser#prog_class_mem_list.
+    def visitProg_class_mem_list(self, ctx:CSlangParser.Prog_class_mem_listContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CSlangParser#prog_class_mem.
+    def visitProg_class_mem(self, ctx:CSlangParser.Prog_class_memContext):
         return self.visitChildren(ctx)
 
 
@@ -206,6 +216,11 @@ class CSlangVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by CSlangParser#expo_func.
     def visitExpo_func(self, ctx:CSlangParser.Expo_funcContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CSlangParser#main_func_decl.
+    def visitMain_func_decl(self, ctx:CSlangParser.Main_func_declContext):
         return self.visitChildren(ctx)
 
 

@@ -1,1 +1,1 @@
-const width: int;
+class A <- B{const width: int;}
