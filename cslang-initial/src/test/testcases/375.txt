@@ -1,0 +1,9 @@
+
+        class Program {
+            const a: string = 1;
+
+            func @main(): string {
+                string1 := 1;
+            }
+        }
+        

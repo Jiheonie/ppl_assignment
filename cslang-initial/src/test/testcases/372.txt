@@ -1,0 +1,9 @@
+
+        class Program {
+            var a: void1 = 1;
+
+            func @main():int {
+                string1 := 1;
+            }
+        }
+        

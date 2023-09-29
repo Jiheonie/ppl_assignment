@@ -1,0 +1,18 @@
+
+        class Overload {
+            func print(s: string): void {
+                io.@writeStr(s);
+                for i:=0; i<5; i:=i+1 { // for loop
+                    if i==3 { 
+                        continue; // skip rest of loop
+                    }
+                    io.@writeInt(i); 
+                }
+
+                io.@writeStr("Press 1 to exit: ");
+                if input==1 {
+                    break; // terminate loop
+                }
+            }
+        }
+        

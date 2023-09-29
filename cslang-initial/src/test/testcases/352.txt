@@ -1,0 +1,15 @@
+
+        class Overload {
+            func print(s: string): void {
+                io.@writeStr(s);
+            }
+            
+            func print(i: int): void {
+                io.@writeInt(i);
+                io.@writeStr("Enter an integer: ");
+                var input : int = io.@readInt();
+                io.@writeInt(input); // Echo input
+            }
+        }
+        // ehllo
+        

@@ -106,8 +106,6 @@ LCB: '{';
 
 RCB: '}';
 
-SIN_Q: '\'';
-
 DOU_Q: '"';
 
 // main program
@@ -141,10 +139,12 @@ exp10:
 	| literal
 	| LP (exp) RP
 	| ID
-	| self_mem_access
+	| self_access
 	| NULL;
 
-literal: INT_LIT | FLOAT_LIT | STR_LIT | BOOL_LIT | array_lit;
+literal: ele_literal | array_lit;
+ele_literal: INT_LIT | FLOAT_LIT | STR_LIT | BOOL_LIT;
+ele_literal_list: ele_literal COMMA ele_literal_list | ele_literal;
 
 exp_list: exp_prime |;
 exp_prime: exp COMMA exp_prime | exp;
@@ -154,9 +154,11 @@ func_type: ref_type | VOID;
 
 ref_type: ele_type | array_type;
 
-ele_type: INT | FLOAT | STRING | BOOL;
-
 array_type: LSB INT_LIT RSB ele_type;
+
+ele_type: value_type | ID;
+
+value_type: INT | FLOAT | STRING | BOOL;
 
 // declarations
 prog_decl: class_decl | program_class_decl;
@@ -252,10 +254,12 @@ body: stmt body |;
 
 params_list: params_prime |;
 params_prime: params_1_type COMMA params_prime | params_1_type;
-params_1_type: identifier_list COLON ref_type;
+params_1_type: id_list_not_null COLON ref_type;
+
+id_list_not_null: ID COMMA id_list_not_null | ID;
 
 // Literals
-array_lit: LSB exp_list RSB;
+array_lit: LSB ele_literal_list RSB;
 
 arr_ele: exp8 LSB exp RSB;
 
@@ -281,8 +285,8 @@ fragment ESCAPE:
 	| '\\r'
 	| '\\n'
 	| '\\t'
-	| '\\"'
-	| '\\\\';
+	| '\\\\'
+	| '\\"';
 
 BOOL_LIT: 'true' | 'false';
 
@@ -297,8 +301,6 @@ CMT_BLOCK: '/*' .*? '*/' -> skip;
 
 WS: [ \t\r\n\f\b]+ -> skip;
 // skip spaces, tabs, newlines
-
-ERROR_CHAR: . {raise ErrorToken(self.text)};
 
 ILLEGAL_ESCAPE:
 	DOU_Q (~["] | '\\"')* DOU_Q {
@@ -317,3 +319,5 @@ UNCLOSE_STRING:
 	else:
 		raise UncloseString(self.text[1:])
 };
+
+ERROR_CHAR: . {raise ErrorToken(self.text)};	

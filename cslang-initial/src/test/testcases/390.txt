@@ -1,0 +1,16 @@
+
+        class Program {
+            var @a: A = new A();
+
+            func @X(@abc, c,d: int): int {
+                string1 := A.hello;
+                var x :int = 1;
+                var y : int = 2;
+                return A.plus(x, y);
+            }
+
+            func @main() : int {
+                @writeInt("asdfasd");
+            }
+        }
+        

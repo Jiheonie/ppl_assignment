@@ -79,6 +79,16 @@ class CSlangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by CSlangParser#ele_literal.
+    def visitEle_literal(self, ctx:CSlangParser.Ele_literalContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CSlangParser#ele_literal_list.
+    def visitEle_literal_list(self, ctx:CSlangParser.Ele_literal_listContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by CSlangParser#exp_list.
     def visitExp_list(self, ctx:CSlangParser.Exp_listContext):
         return self.visitChildren(ctx)
@@ -99,13 +109,18 @@ class CSlangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by CSlangParser#array_type.
+    def visitArray_type(self, ctx:CSlangParser.Array_typeContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by CSlangParser#ele_type.
     def visitEle_type(self, ctx:CSlangParser.Ele_typeContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by CSlangParser#array_type.
-    def visitArray_type(self, ctx:CSlangParser.Array_typeContext):
+    # Visit a parse tree produced by CSlangParser#value_type.
+    def visitValue_type(self, ctx:CSlangParser.Value_typeContext):
         return self.visitChildren(ctx)
 
 
@@ -316,6 +331,11 @@ class CSlangVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by CSlangParser#params_1_type.
     def visitParams_1_type(self, ctx:CSlangParser.Params_1_typeContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CSlangParser#id_list_not_null.
+    def visitId_list_not_null(self, ctx:CSlangParser.Id_list_not_nullContext):
         return self.visitChildren(ctx)
 
 

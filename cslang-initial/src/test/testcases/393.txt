@@ -1,0 +1,7 @@
+
+        class Program {
+            def abd {
+                string := "hello";
+            }
+        }
+        

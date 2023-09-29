@@ -1,0 +1,9 @@
+
+        class Program {
+            func @main():int {
+                for i := 0; i < 10; i < 1 {
+                    io.@writeInt(i);
+                }
+            }
+        }
+        

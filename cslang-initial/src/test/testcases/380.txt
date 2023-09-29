@@ -1,0 +1,9 @@
+
+        class Program {
+            const a: [n]int = 1;
+
+            func X(): Abc {
+                string1 := 1;
+            }
+        }
+        

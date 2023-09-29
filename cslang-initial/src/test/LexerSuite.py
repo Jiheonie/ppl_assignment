@@ -81,7 +81,7 @@ class LexerSuite(unittest.TestCase):
 
     def test20_string(self):
         """test identifiers"""
-        self.assertTrue(TestLexer.test(""" "this is a string \\\\" """, "Unclosed String: this is a string \\\\\" ", 120))
+        self.assertTrue(TestLexer.test(" \"this is a string \\\\\" ", "Unclosed String: this is a string \\\\\" ", 120))
 
     def test21_float(self):
         """test identifiers"""
@@ -154,7 +154,7 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("a,b,c :boolean = 3,2,1;", "a,,,b,,,c,:,boolean,=,3,,,2,,,1,;,<EOF>", 143))
         
     def test44_random(self):
-        self.assertTrue(TestLexer.test("ab'c", "ab,',c,<EOF>", 144))
+        self.assertTrue(TestLexer.test("ab'c", "ab,Error Token '", 144))
         
     def test45_random(self):
         self.assertTrue(TestLexer.test("/*hello*/a=b=c", "a,=,b,=,c,<EOF>", 145))
@@ -231,7 +231,7 @@ class LexerSuite(unittest.TestCase):
     def test69_random(self):
         self.assertTrue(TestLexer.test("a[1,0]", "a,[,1,,,0,],<EOF>", 169))
 
-    def tes70_random(self):
+    def test70_random(self):
         self.assertTrue(TestLexer.test("a[1, 0]", "a,[,1,,,0,],<EOF>", 170))  
 
     def test71_random(self):
@@ -263,7 +263,7 @@ class LexerSuite(unittest.TestCase):
         """test error token"""
         self.assertTrue(TestLexer.test("a&b", "a,Error Token &", 179))
 
-    def test80random(self):
+    def test80_random(self):
         """test error token"""
         self.assertTrue(TestLexer.test("a|b", "a,Error Token |", 180))
 
@@ -406,4 +406,8 @@ class LexerSuite(unittest.TestCase):
     def test126_esc(self):
         self.assertTrue(TestLexer.test(""" "\\\\nhello\t" """, "\\\\nhello\t,<EOF>", 226))
 
-    
+    def test127_str(self):
+        self.assertTrue(TestLexer.test(""" "This is a string\\b" """, "This is a string\\b,<EOF>", 227))
+
+    def test128_str_esc(self):
+        self.assertTrue(TestLexer.test(""" "\\\\" """, "Unclosed String: \\\\\" ", 228))

@@ -1,0 +1,16 @@
+
+        class Animal {
+            var sound: string = "sound";
+        }
+
+        class Animal <- Dog {
+            var sound: string = "Gau";
+        }
+
+        class Program {
+            func @main():int {
+                var hwng : Animal = new Dog();
+                print(hwng.sound);
+            }
+        }
+        

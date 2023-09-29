@@ -1,0 +1,7 @@
+
+        class Program {
+            func @main():int {
+                var a:int = 1 + (2 + 3);
+            }
+        }
+        
