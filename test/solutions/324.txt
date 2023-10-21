@@ -1,0 +1,1 @@
+Program([ClassDecl(Id(B),Id(A),[AttributeDecl(ConstDecl(Id(My1stCons),IntType,BinaryOp(+,IntLit(1),IntLit(5)))),AttributeDecl(ConstDecl(Id(My2ndCons),IntType,IntLit(2))),AttributeDecl(VarDecl(Id(@x),IntType,IntLit(0))),AttributeDecl(VarDecl(Id(@y),IntType,IntLit(0)))])])

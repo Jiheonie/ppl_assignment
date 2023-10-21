@@ -1,0 +1,9 @@
+
+        class Program {
+            func @main():int {
+                var s: [10]int;
+                var a: [20]int = 
+                @changeText(s[0], a[a[1+2]], "a" ^ "b");
+            }
+        }
+        

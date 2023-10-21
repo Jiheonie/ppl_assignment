@@ -1,0 +1,11 @@
+
+        class Program {
+            func @main():int {
+                str := "Hello " ^ "World!";
+                io.@writeStr(str);
+
+                var escapeStr : string = "First Line"; 
+                io.@writeStr(escapeStr);
+            }
+        }
+        

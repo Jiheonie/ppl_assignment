@@ -1,0 +1,7 @@
+
+        class Program {
+            func @main():int {
+                @ip.num[0] := -(123 + 456 / 2);
+            }
+        }
+        

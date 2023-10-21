@@ -1,0 +1,2 @@
+class A <- B{const My1stCons, My2ndCons: int = 1 + 5, 2;
+        var @x, @y : int = 0, 0;}

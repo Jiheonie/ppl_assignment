@@ -1,0 +1,1 @@
+Program([ClassDecl(Id(Program),[MethodDecl(Id(@main),[],IntType,Block([AssignStmt(Id(str),BinaryOp(^,StringLit(Hello ),StringLit(World!))),Call(Id(@writeStr),[Id(str)]),VarDecl(Id(escapeStr),StringType,StringLit(First Line)),Call(Id(@writeStr),[Id(escapeStr)])]))])])

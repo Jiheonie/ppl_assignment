@@ -1,0 +1,1 @@
+Program([ClassDecl(Id(Program),[MethodDecl(Id(@main),[],IntType,Block([AssignStmt(ArrayCell(FieldAccess(FieldAccess(Id(@ip)),Id(num)),IntLit(0)),BinaryOp(+,IntLit(1),IntLit(2)))]))])])

@@ -1,0 +1,1 @@
+Program([ClassDecl(Id(Program),[MethodDecl(Id(@main),[],IntType,Block([VarDecl(Id(myOtherObj),ClassType(Id(NewObj)),NewExpr(Id(NewObj),[])),AssignStmt(FieldAccess(Id(myOtherObj),Id(a)),NullLiteral())]))])])

@@ -1,0 +1,1 @@
+Program([ClassDecl(Id(Program),[MethodDecl(Id(@main),[],IntType,Block([AssignStmt(FieldAccess(Id(@text)),BinaryOp(+,Id(a),BinaryOp(*,Id(b),Id(c))))]))])])

@@ -1,0 +1,1 @@
+Program([ClassDecl(Id(Animal),[AttributeDecl(VarDecl(Id(sound),StringType,StringLit(sound)))]),ClassDecl(Id(Dog),Id(Animal),[AttributeDecl(VarDecl(Id(sound),StringType,StringLit(meow)))]),ClassDecl(Id(Program),[MethodDecl(Id(@main),[],IntType,Block([VarDecl(Id(abc),ClassType(Id(Animal)),NewExpr(Id(Dog),[])),Call(Id(@writeStr),[FieldAccess(Id(abc),Id(sound))])]))])])

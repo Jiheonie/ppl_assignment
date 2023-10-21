@@ -1,0 +1,11 @@
+
+        class Program {
+            func double(lst: int): int {
+                if @len(lst) == 0 {
+                    return [];
+                }
+                var i:int = lst[0];
+                return ([2*i] + self.double(lst[12]));
+            }
+        }
+        

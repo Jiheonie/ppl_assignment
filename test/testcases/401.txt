@@ -1,0 +1,63 @@
+
+        class Program{
+            func railfence(ciphertext: string, key: integer):string {
+            if key <= 1
+                {return ciphertext;}
+            
+            var matrix: [15] string;
+            for i:=0 ; i<15 ; i:=i+1 {
+                var matrix_a: [15]string;
+            }
+            /* 
+                15 for each row
+                maxium 15 rows
+            */
+
+            var dir: bool = true;
+            // true for down, false for up
+
+            var row, col: int= 0, 0;
+
+            for i := 0; i < @length(ciphertext); i:=i + 1 {
+                if row == 0 {dir := true;}
+                if row == key - 1 {dir := false;}
+                rail[row] := null;
+                
+                col := col + 1;
+                if dir
+                    {row := row + 1;}
+                else {row := row - 1;}
+            }
+
+            var index: int = 0;
+            for i := 0; i < key; i:=i + 1 {
+                for j := 0; j < @length(ciphertext);j:= j + 1{
+                    if matrix[i] == null && (index < @length(ciphertext)) {
+                        matrix[i] := ciphertext[index];
+                        index := index + 1;
+                    }}
+            
+            row := 0; col := 0;
+            var result: string;
+            for i:=0; i< @length(ciphertext);i:= i + 1 
+            {
+                // check the direction of flow
+                if row == 0
+                    {dir := true;}
+                if row == key - 1
+                    {dir := false;}
+ 
+                // place the marker
+                if rail[row] != "*"
+                    {result := result.rail[col];}
+                col := col + 1;
+ 
+                // find the next row using direction flag
+                if dir
+                    {row := row + 1;}
+                else {row := row - 1;}
+            }
+            return result;
+        }
+        }}
+        

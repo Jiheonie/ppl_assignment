@@ -1,0 +1,7 @@
+
+        class Program {
+            var a: [2]int = [2,"why not"];
+            func @main():void{
+            a[1],a[2] := [1,2] ,[2,3];
+        }}
+        

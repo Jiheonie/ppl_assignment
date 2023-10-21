@@ -1,0 +1,11 @@
+
+        class Program {
+            func doubFunc(a:int):int {
+                return 2*a;
+            }
+            
+            func double1(lst: int): int {
+                return @list(@map(doubFunc, lst));
+            }
+        }
+        

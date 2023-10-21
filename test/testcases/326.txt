@@ -1,0 +1,7 @@
+class A <- B{
+            func X(): void {
+                self.aPI := null;
+                value := x.foo(5);
+                l[3] := value * 2;
+            }
+        }

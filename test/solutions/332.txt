@@ -1,0 +1,1 @@
+Program([ClassDecl(Id(Overload),[MethodDecl(Id(print),[Param(Id(s),StringType)],VoidType,Block([Call(Id(@writeStr),[Id(s)])])),MethodDecl(Id(print),[Param(Id(i),IntType)],VoidType,Block([Call(Id(@writeInt),[Id(i)]),Call(Id(@writeStr),[StringLit(Enter an integer: )]),VarDecl(Id(input),IntType,CallExpr(Id(@readInt),[])),Call(Id(@writeInt),[Id(input)])]))])])
