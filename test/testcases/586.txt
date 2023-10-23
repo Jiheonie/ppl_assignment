@@ -1,0 +1,8 @@
+
+        class Program {
+            func @main():int {
+                var myObj : NewObj = new NewObj();
+                myObj.a := null;
+            }
+        }
+        

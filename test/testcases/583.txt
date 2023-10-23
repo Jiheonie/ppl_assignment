@@ -1,0 +1,17 @@
+
+        class A {
+            func @main(a:int, b:int, c:bool): int {
+                for i := a; i < b; i := i + 1 {
+                    if @isChecked(a) == c {
+                        continue;
+                    }
+                    /* add 
+                    here */
+                    io.@writeStr("Press 1 to exit: ");
+                    if input==1 {
+                        break; // terminate loop
+                    }
+                }
+            }
+        }
+        

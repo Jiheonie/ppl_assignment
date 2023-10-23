@@ -1,0 +1,1 @@
+Program([ClassDecl(Id(A),[AttributeDecl(ConstDecl(Id(A),IntType,None)),MethodDecl(Id(B),[],VoidType,Block([]))])])

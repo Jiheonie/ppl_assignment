@@ -1,0 +1,8 @@
+
+        class Program {
+            func @main():void {
+                var r, s: int;
+                r := 2.0;
+            }
+        }
+        

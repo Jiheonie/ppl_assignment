@@ -1,0 +1,13 @@
+
+        class A {
+            const hello: string = "hello";      
+        }
+
+        class Program {
+            var @a: A = new A();
+
+            func @X(): Abc {
+                string1 := A.hello;
+            }
+        }
+        

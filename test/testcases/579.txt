@@ -1,0 +1,9 @@
+
+        class Program {
+            var a: int = 1;    
+        
+            func constructor() {
+                x := self.a;
+            }
+        }
+        

@@ -1,0 +1,1 @@
+Program([ClassDecl(Id(Program),[MethodDecl(Id(@main),[],IntType,Block([Call(Id(@writeBool),[UnaryOp(!,BinaryOp(==,IntLit(10),IntLit(5)))])]))])])

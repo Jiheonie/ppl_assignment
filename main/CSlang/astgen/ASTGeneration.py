@@ -3,14 +3,7 @@ from CSlangParser import CSlangParser
 from AST import *
 
 class ASTGeneration(CSlangVisitor):
-  # def visitClassdecl(self,ctx:CSlangParser.ClassdeclContext):
-  #   return ClassDecl(Id(ctx.ID().getText()),[self.visit(x) for x in ctx.memdecl()])
 
-  # def visitMemdecl(self,ctx:CSlangParser.MemdeclContext):
-  #   return AttributeDecl(VarDecl(Id(ctx.ID().getText()),self.visit(ctx.cslangtype())))
-
-  # def visitCslangtype(self,ctx:CSlangParser.CslangtypeContext):
-  #   return IntType() if ctx.INTTYPE() else VoidType()
     
   def visitProgram(self, ctx:CSlangParser.ProgramContext):
     return Program(self.visit(ctx.prog_decl_list()))
@@ -116,9 +109,9 @@ class ASTGeneration(CSlangVisitor):
   # Visit a parse tree produced by CSlangParser#ele_literal.
   def visitEle_literal(self, ctx:CSlangParser.Ele_literalContext):
     if ctx.INT_LIT():
-      return IntLiteral(ctx.INT_LIT().getText())
+      return IntLiteral(int(ctx.INT_LIT().getText()))
     if ctx.FLOAT_LIT():
-      return FloatLiteral(ctx.FLOAT_LIT().getText())
+      return FloatLiteral(float(ctx.FLOAT_LIT().getText()))
     if ctx.STR_LIT():
       return StringLiteral(ctx.STR_LIT().getText())    
     return BooleanLiteral(True if ctx.BOOL_LIT().getText() == "true" else False)

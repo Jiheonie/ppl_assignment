@@ -1,0 +1,12 @@
+
+        class A {}
+
+        class Program {
+            const a: [5]A = [1, 2];
+
+            func X(): Abc {
+                string1 := 1;
+                return;
+            }
+        }
+        

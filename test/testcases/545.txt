@@ -1,0 +1,10 @@
+
+        class B <- A {
+            var lst : [5]int = [1, 2, 3];
+
+            func lst(a:int):void {
+                var x:int = self.lst[0];
+                io.@writeInt(x);
+            }
+        }
+        

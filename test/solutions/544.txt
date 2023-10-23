@@ -1,0 +1,1 @@
+Program([ClassDecl(Id(A),[AttributeDecl(ConstDecl(Id(hello),StringType,StringLit(hello)))]),ClassDecl(Id(Program),[AttributeDecl(VarDecl(Id(@a),ClassType(Id(A)),NewExpr(Id(A),[]))),MethodDecl(Id(@X),[],ClassType(Id(Abc)),Block([AssignStmt(Id(string1),FieldAccess(Id(A),Id(hello)))]))])])

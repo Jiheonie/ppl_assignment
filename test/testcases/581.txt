@@ -1,0 +1,10 @@
+
+        class Program {
+            var a,b,c:int;
+            func @main(): void {
+                for i := 0; i < 10; i := i + 1 {
+                    io.@writeInt(i);
+                }
+            }
+        }
+        

@@ -1,0 +1,14 @@
+
+        class A {
+            var lst: [5]int = [1,2,3];
+            func constructor() {
+                io.@writeInt(self.lst);
+            }
+        }
+        class Program {
+            func @main():int {
+                var obj : A = new A();
+                io.@writeInt(obj.lst);
+            }
+        }
+        
