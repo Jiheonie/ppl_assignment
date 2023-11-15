@@ -5,4 +5,8 @@
                 m.a();
             }
         }
+        class Y <- X {}
+        class Y {
+            func a():int {}
+        }
         

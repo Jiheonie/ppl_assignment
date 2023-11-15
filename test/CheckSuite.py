@@ -204,3 +204,61 @@ class CheckSuite(unittest.TestCase):
         """
         expect = "Redeclared Class: Program"
         self.assertTrue(TestChecker.test(input,expect,421)) 
+
+    def test_decl_in_method(self):
+        input = """
+        class Program {
+            func @main():void {
+                var m:X;
+                m.a();
+            }
+        }
+        """
+        expect = "Undeclared Class: X"
+        self.assertTrue(TestChecker.test(input,expect,422)) 
+
+    def test_decl_in_method_with_parent(self):
+        input = """
+        class Program {
+            func @main():void {
+                var m:X;
+                m.a();
+            }
+        }
+        class X {
+            var a: int;
+        }
+        """
+        expect = "Undeclared Method: a"
+        self.assertTrue(TestChecker.test(input,expect,423)) 
+
+    def test_decl_in_method_with_parent2(self):
+        input = """
+        class Program {
+            func @main():void {
+                var m:X;
+                m.a();
+            }
+        }
+        class X {
+            func a():int {}
+        }
+        """
+        expect = "Type Mismatch In Statement: Call(Id(m),Id(a),[])"
+        self.assertTrue(TestChecker.test(input,expect,424)) 
+
+    def test_decl_in_method_with_parent3(self):
+        input = """
+        class Program {
+            func @main():void {
+                var m:X;
+                m.a();
+            }
+        }
+        class Y <- X {}
+        class Y {
+            func a():int {}
+        }
+        """
+        expect = "Type Mismatch In Statement: Call(Id(m),Id(a),[])"
+        self.assertTrue(TestChecker.test(input,expect,425))

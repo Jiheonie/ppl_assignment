@@ -5,4 +5,7 @@
                 m.a();
             }
         }
+        class X {
+            var a: int;
+        }
         
