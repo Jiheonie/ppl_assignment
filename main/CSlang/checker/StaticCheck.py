@@ -66,17 +66,20 @@ class GetEnv(BaseVisitor, Utils):
     if "Program" not in class_name:
       raise NoEntryPoint()
     
-    program_class = list(filter(lambda decl: decl.classname.name == "Program", ast.decl))[0]
-    if program_class.parentname != None:
-      raise NoEntryPoint()
+    program_classes = list(filter(lambda decl: decl.classname.name == "Program", ast.decl))
+    has_entry_point = False
+    for pc in program_classes:
+      method_names = [mem.name.name for mem in pc.memlist if type(mem) is MethodDecl]
+      if "@main" not in method_names:
+        continue
+      
+      main_func_list = list(filter(lambda mem: isinstance(mem, MethodDecl) and mem.name.name == "@main" , pc.memlist))
+      valid_main_func = list(filter(lambda func: len(func.param) == 0 and isinstance(func.returnType, VoidType), main_func_list))
+      if len(valid_main_func) == 0:
+        continue
+      has_entry_point = True
 
-    method_names = [mem.name.name for mem in program_class.memlist if type(mem) is MethodDecl]
-    if "@main" not in method_names:
-      raise NoEntryPoint()
-    
-    main_func_list = list(filter(lambda mem: type(mem) is MethodDecl and mem.name.name == "@main" , program_class.memlist))
-    valid_main_func = list(filter(lambda func: isinstance(func, MethodDecl) and len(func.param) == 0 and isinstance(func.returnType, VoidType), main_func_list))
-    if len(valid_main_func) == 0:
+    if not has_entry_point:
       raise NoEntryPoint()
     
     c = self.global_env

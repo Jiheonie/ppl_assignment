@@ -196,3 +196,11 @@ class CheckSuite(unittest.TestCase):
         }""" 
         expect = "Redeclared Method: @main"
         self.assertTrue(TestChecker.test(input,expect,420)) 
+
+    def test_redeclared_program(self):
+        input = """
+        class Program {}
+        class Program {func @main():void {}}
+        """
+        expect = "Redeclared Class: Program"
+        self.assertTrue(TestChecker.test(input,expect,421)) 
