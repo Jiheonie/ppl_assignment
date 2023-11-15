@@ -1,0 +1,6 @@
+
+        class TestParent <- io {}
+        class Program {
+            func @main():void {}
+        }
+        
