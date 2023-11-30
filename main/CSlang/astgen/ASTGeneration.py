@@ -218,17 +218,22 @@ class ASTGeneration(CSlangVisitor):
     if ctx.static_mem_access():
       return self.visit(ctx.static_mem_access()) 
     params = self.visit(ctx.static_method_access())
-    return CallExpr(None, params[0], params[1])
+    return CallExpr(params[0], params[1], params[2])
+    # return CallExpr(None, params[0], params[1])
 
 
   # Visit a parse tree produced by CSlangParser#static_mem_access.
   def visitStatic_mem_access(self, ctx:CSlangParser.Static_mem_accessContext):
-    return FieldAccess(None, Id(ctx.AT_ID().getText()))
+    return FieldAccess(Id(ctx.ID().getText()) if ctx.ID() else None, Id(ctx.AT_ID().getText()))
+    # return FieldAccess(None, Id(ctx.AT_ID().getText()))
 
 
   # Visit a parse tree produced by CSlangParser#static_method_access.
   def visitStatic_method_access(self, ctx:CSlangParser.Static_method_accessContext):
-    return (Id(ctx.AT_ID().getText()), self.visit(ctx.exp_list()))
+    if ctx.ID():
+      return (Id(ctx.ID().getText()), Id(ctx.AT_ID().getText()), self.visit(ctx.exp_list()))
+    return (None, Id(ctx.AT_ID().getText()), self.visit(ctx.exp_list()))
+    # return (Id(ctx.AT_ID().getText()), self.visit(ctx.exp_list()))
 
 
   # Visit a parse tree produced by CSlangParser#self_access.
@@ -458,10 +463,10 @@ class ASTGeneration(CSlangVisitor):
   # Visit a parse tree produced by CSlangParser#method_invocation_stmt.
   def visitMethod_invocation_stmt(self, ctx:CSlangParser.Method_invocation_stmtContext):
     params = self.visit(ctx.getChild(0))
-    if ctx.inst_method_access():
-      return CallStmt(params[0], params[1], params[2])
-    if ctx.static_method_access():
-      return CallStmt(None, params[0], params[1])
+    # if ctx.inst_method_access():
+    #   return CallStmt(params[0], params[1], params[2])
+    # if ctx.static_method_access():
+    #   return CallStmt(None, params[0], params[1])
     return CallStmt(params[0], params[1], params[2])
 
 

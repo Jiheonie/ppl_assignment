@@ -1,9 +1,0 @@
-
-        class Program {
-            func @main():void {}
-            func constructor() {}
-            func constructor(x:int) {}
-            func a():int {}
-            func a():float {}
-        }
-        

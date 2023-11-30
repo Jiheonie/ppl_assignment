@@ -1,1 +1,0 @@
-class main{ func a(): void {}}

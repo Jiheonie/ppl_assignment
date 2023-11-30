@@ -1,6 +1,0 @@
-
-        class Program {
-            func @main():void {}
-            func @main():void {}
-        }
-        

@@ -1,9 +1,0 @@
-
-        class Program {
-            func @main():void {}
-            var x:int;
-        }
-        class io {
-            var x:int;
-        }
-        
