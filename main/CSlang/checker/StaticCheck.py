@@ -170,10 +170,10 @@ class GetEnv(BaseVisitor, Utils, SupportUtils):
     self.global_env += [StaticMember(classScope[1], decl["name"], decl["typ"], decl["isMu"])]
     return classScope
   
-  def visitVarDecl(self, ast:VarDecl, c):
-    vartype = self.visit(ast.varType, c)
+  def visitVarDecl(self, ast:VarDecl, classScope):
+    vartype = self.visit(ast.varType, classScope)
     if isinstance(vartype, ClassType):
-      vartype = Instance(vartype)
+      vartype = Instance(vartype)    
     return {"name": ast.variable.name, "typ": vartype, "isMu": True}
 
   def visitConstDecl(self, ast:ConstDecl, c):
@@ -220,34 +220,53 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
     reduce(lambda c_pre, decl: self.visit(decl, c_pre), ast.decl, self.global_env)
 
   def visitClassDecl(self, ast, globalScope):
-    func_mem = list(filter(lambda mem: isinstance(mem, MethodDecl), ast.memlist))
-    reduce(lambda c_pre, mem_cur: self.visit(mem_cur, c_pre), func_mem, globalScope)
+    reduce(lambda c_pre, mem_cur: self.visit(mem_cur, c_pre), ast.memlist, globalScope)
   
   def visitMethodDecl(self, ast, globalScope):
     env = [] # => List[{name, typ, isMu}]
     env = reduce(lambda env_pre, decl: self.visit(decl, ("param", env_pre)), ast.param, env)
     self.visit(ast.body, [env, globalScope])
 
-  def visitAttributeDecl(self,ast,c): pass
+  def visitAttributeDecl(self, ast, globalScope): 
+    self.visit(ast.decl, ("var" if isinstance(ast.decl, VarDecl) else "const", [[], globalScope]))
 
-  def visitVarDecl(self, ast, localScope):
-    if ast.variable.name in map(lambda decl: decl["name"], localScope[1]):
-      if localScope[0] == "var":
+  # (decltype, [[local]...[global]])
+  def visitVarDecl(self, ast, visibleScope):
+    # chua test type la Instance
+    if ast.variable.name in map(lambda decl: decl["name"], visibleScope[1][0]):
+      if visibleScope[0] == "var":
         raise Redeclared(Variable(), ast.variable.name)
       # param
-      raise Redeclared(Parameter(), ast.variable.name)
-    vartype = self.visit(ast.varType, localScope)
+      raise Redeclared(Parameter(), ast.variable.name) 
+    vartype = self.visit(ast.varType, visibleScope)
+    if ast.varInit:
+      init_type = self.visit(ast.varInit, visibleScope[1])
+      if isinstance(init_type, VoidType):
+        raise TypeMismatchInDeclaration(ast) #
+      if not self.checkTypeMatch(vartype, init_type, visibleScope[1][-1]):
+        raise TypeMismatchInDeclaration(ast) # tested 666
     if isinstance(vartype, ClassType):
       vartype = Instance(vartype)
-    return localScope[1] + [{"name": ast.variable.name, "typ": vartype, "isMu": True}]
+    visibleScope[1][0] += [{"name": ast.variable.name, "typ": vartype, "isMu": True}]
+    return visibleScope[1]
 
-  def visitConstDecl(self, ast, localScope):
-    if ast.constant.name in map(lambda decl: decl["name"], localScope[1]):
+  # (decltype, [[local]...[global]])
+  # (decltype, [[], [global]]) => attribute
+  def visitConstDecl(self, ast, visibleScope):
+    if ast.constant.name in map(lambda decl: decl["name"], visibleScope[1][0]):
       raise Redeclared(Constant(), ast.constant.name)
-    consttype = self.visit(ast.constType, localScope)
+    consttype = self.visit(ast.constType, visibleScope)
+    if not ast.value:
+      raise TypeMismatchInDeclaration(ast) # tested 667
+    init_type = self.visit(ast.value, visibleScope[1])
+    if isinstance(init_type, VoidType):
+      raise TypeMismatchInDeclaration(ast) #
+    if not self.checkTypeMatch(consttype, init_type, visibleScope[1][-1]):
+      raise TypeMismatchInDeclaration(ast) # tested 667
     if isinstance(consttype, ClassType):
       consttype = Instance(consttype)
-    return localScope[1] + [{"name": ast.constant.name, "typ": consttype, "isMu": False}]
+    visibleScope[1][0] += [{"name": ast.constant.name, "typ": consttype, "isMu": False}]
+    return visibleScope[1]
 
   def visitBinaryOp(self,ast,param):
     pass
@@ -261,13 +280,13 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
   def visitArrayCell(self,ast,param):
     pass
     
-  def visitBlock(self, ast, visibleScope): # => [[param], [global]]
+  def visitBlock(self, ast, visibleScope): # => [[param],...,[global]]
     decl_block = [stmt for stmt in ast.stmt if isinstance(stmt, StoreDecl)]
     stmt_block = [stmt for stmt in ast.stmt if not isinstance(stmt, StoreDecl)]
-    env = []
-    env = reduce(lambda env_pre, decl: self.visit(decl, ("var", env_pre)) if isinstance(decl, VarDecl) else self.visit(decl, ("const", env_pre)), decl_block, env)
+    env = [[]] + visibleScope
+    env = reduce(lambda env_pre, decl: self.visit(decl, ("var" if isinstance(decl, VarDecl) else "const", env_pre)), decl_block, env)
     for stmt in stmt_block:
-      self.visit(stmt, [env] + visibleScope)
+      self.visit(stmt, env)
 
   # visibleScope => [[local],...,[global]]
   def visitId(self, ast, visibleScope):
