@@ -61,11 +61,14 @@ class SupportUtils:
     if isinstance(lType, ClassType) and isinstance(rType, ClassType):
       lClassname = lType.classname.name
       rClassname = rType.classname.name
+      if lClassname == rClassname: 
+        return True
       return self.checkIsChildOf(rClassname, lClassname, globalScope)
     if isinstance(lType, ArrayType) and isinstance(rType, ArrayType):
-      if lType.size != rType.size:
-        return False
-      return self.checkIsChildOf(lType.eleType, rType.eleType, globalScope)
+      if not self.checkTypeMatch(lType.eleType, rType.eleType, globalScope):
+        return False # tested 669
+      if lType.size != rType.size: 
+        return False # tested 668
     return True
 
   def checkIsConst(self, lhs, visibleScope) -> bool:
@@ -74,6 +77,7 @@ class SupportUtils:
       return decl["isMu"] == False
     if isinstance(lhs, FieldAccess): #obj:Expr, fieldname:Id
       mem = self.searchMemberCalledByClass(lhs.obj)
+      return mem.isMu == False
 
   def searchLocalIdByName(self, name:str, visibleScope):
     for scope in visibleScope[:-1]:
@@ -84,7 +88,7 @@ class SupportUtils:
 
   def searchClassByName(self, classname:str, globalScope):
     for mem in globalScope:
-      if classname == mem.name and isinstance(mem, BKClass):
+      if isinstance(mem, BKClass) and classname == mem.name:
         return mem
     return None
   
@@ -95,11 +99,20 @@ class SupportUtils:
     return None
   
   def searchMemberCalledByClass(self, classname:str, memName:str, globalScope):
-    targetClass = self.searchClassByName(classname, globalScope) # => BKClass
-    for mem in targetClass.member: # => Member
+    target_class = self.searchClassByName(classname, globalScope) # => BKClass
+    for mem in target_class.member: # => Member
       if memName == mem.name: return mem
-    if targetClass.parent == None: return None
-    return self.searchMemberCalledByClass(targetClass.parent, memName, globalScope)
+    if target_class.parent == None: return None
+    return self.searchMemberCalledByClass(target_class.parent, memName, globalScope)
+
+  def getConstructorList(self, classname:str, globalScope):
+    target_class = self.searchClassByName(classname, globalScope)
+    if target_class:
+      constructor_list = []
+      for mem in target_class.member:
+        # mem: Member(name, typ, False)
+        if mem.name == "constructor": constructor_list.append(mem)
+      return constructor_list
 
 
 class GetEnv(BaseVisitor, Utils, SupportUtils):
@@ -198,7 +211,7 @@ class GetEnv(BaseVisitor, Utils, SupportUtils):
     return VoidType()
 
   def visitArrayType(self, ast, c):
-    return ArrayType(ast.size, self.visit(ast.eleType, c))
+    return ArrayType(int(ast.size), self.visit(ast.eleType, c))
 
   def visitClassType(self, ast, c):
     target_class = self.searchClassByName(ast.classname.name, self.global_env)
@@ -210,6 +223,7 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
   def __init__(self, ast):
     self.ast = ast
     self.global_env = []
+    self.stackscope = []
 
   def check(self):
     self.visit(self.ast, self.global_env)
@@ -223,9 +237,12 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
     reduce(lambda c_pre, mem_cur: self.visit(mem_cur, c_pre), ast.memlist, globalScope)
   
   def visitMethodDecl(self, ast, globalScope):
-    env = [] # => List[{name, typ, isMu}]
-    env = reduce(lambda env_pre, decl: self.visit(decl, ("param", env_pre)), ast.param, env)
-    self.visit(ast.body, [env, globalScope])
+    env = [[]] # => [List[{name, typ, isMu}]]
+    if len(ast.param) > 0:
+      env = reduce(lambda env_pre, decl: self.visit(decl, ("param", env_pre)), ast.param, env)
+    self.stackscope.append(MethodDecl)
+    self.visit(ast.body, env + [globalScope])
+    self.stackscope.pop()
 
   def visitAttributeDecl(self, ast, globalScope): 
     self.visit(ast.decl, ("var" if isinstance(ast.decl, VarDecl) else "const", [[], globalScope]))
@@ -239,14 +256,17 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
       # param
       raise Redeclared(Parameter(), ast.variable.name) 
     vartype = self.visit(ast.varType, visibleScope)
+    if isinstance(vartype, ClassType):
+      vartype = Instance(vartype)
     if ast.varInit:
       init_type = self.visit(ast.varInit, visibleScope[1])
       if isinstance(init_type, VoidType):
         raise TypeMismatchInDeclaration(ast) #
+      if isinstance(vartype, Instance) and isinstance(init_type, Instance):
+        if not self.checkTypeMatch(vartype.classtype, init_type.classtype, visibleScope[1][-1]):
+          raise TypeMismatchInDeclaration(ast) #
       if not self.checkTypeMatch(vartype, init_type, visibleScope[1][-1]):
         raise TypeMismatchInDeclaration(ast) # tested 666
-    if isinstance(vartype, ClassType):
-      vartype = Instance(vartype)
     visibleScope[1][0] += [{"name": ast.variable.name, "typ": vartype, "isMu": True}]
     return visibleScope[1]
 
@@ -256,31 +276,114 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
     if ast.constant.name in map(lambda decl: decl["name"], visibleScope[1][0]):
       raise Redeclared(Constant(), ast.constant.name)
     consttype = self.visit(ast.constType, visibleScope)
+    if isinstance(consttype, ClassType):
+      consttype = Instance(consttype)
     if not ast.value:
       raise TypeMismatchInDeclaration(ast) # tested 667
     init_type = self.visit(ast.value, visibleScope[1])
     if isinstance(init_type, VoidType):
       raise TypeMismatchInDeclaration(ast) #
+    if isinstance(consttype, Instance) and isinstance(init_type, Instance):
+      if not self.checkTypeMatch(consttype.classtype, init_type.classtype, visibleScope[1][-1]):
+        raise TypeMismatchInDeclaration(ast) #
     if not self.checkTypeMatch(consttype, init_type, visibleScope[1][-1]):
       raise TypeMismatchInDeclaration(ast) # tested 667
-    if isinstance(consttype, ClassType):
-      consttype = Instance(consttype)
+
     visibleScope[1][0] += [{"name": ast.constant.name, "typ": consttype, "isMu": False}]
     return visibleScope[1]
 
-  def visitBinaryOp(self,ast,param):
-    pass
+  def visitBinaryOp(self, ast, visibleScope):
+    lType = self.visit(ast.left, visibleScope)
+    rType = self.visit(ast.right, visibleScope)
+    if ast.op in ["+", "-", "*"]:
+      if not isinstance(lType, IntType) and not isinstance(lType, FloatType):
+        raise TypeMismatchInExpression(ast) #
+      if not isinstance(rType, IntType) and not isinstance(rType, FloatType):
+        raise TypeMismatchInExpression(ast) #
+      if isinstance(lType, FloatType) or isinstance(rType, FloatType):
+        return FloatType()
+      return IntType()
+
+    if ast.op == "/":
+      if not isinstance(lType, IntType) and not isinstance(lType, FloatType):
+        raise TypeMismatchInExpression(ast) #
+      if not isinstance(rType, IntType) and not isinstance(rType, FloatType):
+        raise TypeMismatchInExpression(ast) #
+      return FloatType()
+    
+    if ast.op in ["\\", "%"]:
+      if not isinstance(lType, IntType) or not isinstance(rType, IntType):
+        raise TypeMismatchInExpression(ast) #
+      return IntType()
+    
+    if ast.op in ["&&", "||"]:
+      if not isinstance(lType, BoolType) or not isinstance(rType, BoolType):
+        raise TypeMismatchInExpression(ast) #
+      return BoolType()
+
+    if ast.op == "^":
+      if not isinstance(lType, StringType) or not isinstance(rType, StringType):
+        raise TypeMismatchInExpression(ast) #
+      return StringType()
+    
+    if ast.op in ["==", "!="]:
+      if isinstance(lType, IntType) and not isinstance(rType, IntType):
+        raise TypeMismatchInExpression(ast) #
+      if isinstance(rType, IntType) and not isinstance(lType, IntType):
+        raise TypeMismatchInExpression(ast) #
+      if isinstance(lType, BoolType) and not isinstance(rType, BoolType):
+        raise TypeMismatchInExpression(ast) #
+      if isinstance(rType, BoolType) and not isinstance(rType, BoolType):
+        raise TypeMismatchInExpression(ast) #
+      return BoolType()
 
   def visitUnaryOp(self,ast,param):
-    pass
-
-  def visitNewExpr(self,ast,param):
-    pass
-
-  def visitArrayCell(self,ast,param):
-    pass
+    bodyType = self.visit(ast.body, visibleScope)
+    if ast.op == "-":
+      if isinstance(bodyType, IntType):
+        return IntType()
+      if isinstance(bodyType, FloatType):
+        return FloatType()
+      raise TypeMismatchInExpression(ast) #
     
-  def visitBlock(self, ast, visibleScope): # => [[param],...,[global]]
+    if ast.op == "!":
+      if not isinstance(bodyType, BoolType):
+        raise TypeMismatchInExpression(ast)
+      return BoolType()
+
+  def visitNewExpr(self,ast,visibleScope):
+    classtype = self.visit(ast.classname, visibleScope)
+    if len(ast.param) == 0:
+      return Instance(classtype)
+    constructor_list = self.getConstructorList(classtype.classname.name, self.global_env)
+    has_found = False
+    for constructor in constructor_list:
+      param_list = constructor.typ.partype
+      wrong_method = False
+      if len(param_list) != len(ast.param):
+        continue
+      for idx in range(len(param_list)):
+        exp_typ = self.visit(ast.param[idx], visibleScope)
+        if self.checkTypeMatch(exp_typ, param_list[idx], self.global_env):
+          continue
+        wrong_method = True
+      if wrong_method:
+        continue
+      has_found = True
+    if not has_found:
+      raise TypeMismatchInExpression(ast) # tested 670
+    return Instance(classtype)
+
+  def visitArrayCell(self,ast,visibleScope):
+    idxtype = self.visit(ast.idx, visibleScope)
+    arrtype = self.visit(ast.arr, visibleScope)
+    if not isinstance(arrtype, ArrayType):
+      raise TypeMismatchInExpression(ast) # tested 674
+    if not isinstance(idxtype, IntType):
+      raise TypeMismatchInExpression(ast) # tested 675
+    return arrtype.eleType
+    
+  def visitBlock(self, ast, visibleScope): # [[param],...,[global]]
     decl_block = [stmt for stmt in ast.stmt if isinstance(stmt, StoreDecl)]
     stmt_block = [stmt for stmt in ast.stmt if not isinstance(stmt, StoreDecl)]
     env = [[]] + visibleScope
@@ -319,8 +422,11 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
         mem = self.searchStaticMemByName(fieldname, visibleScope) 
       if not mem.isMu:
         raise CannotAssignToConstant(ast) # tested 640
-    if isinstance(ast.lhs, ArrayCell): 
-      pass
+    if isinstance(lt, ArrayType) and isinstance(rt, ArrayType): 
+      if not self.checkTypeMatch(lt.eleType, rt.eleType, self.global_env):
+        raise TypeMismatchInStatement(ast) # tested 671
+      if lt.size != rt.size:
+        raise TypeMismatchInStatement(ast) # 
     if not self.checkTypeMatch(lt, rt, visibleScope[-1]):
       raise TypeMismatchInStatement(ast) # tested 641
 
@@ -455,18 +561,25 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
         raise TypeMismatchInStatement(ast)
     return target_mem.typ.rettype
   
-  
-  def visitIf(self,ast,param):
-    pass
+  # [[local]...[global]]
+  def visitIf(self, ast, visibleScope):
+    env = [[]] + visibleScope
+    # if ast.preStmt:
+      
+    self.stackscope.append(If)
+
+    self.stackscope.pop()
   
   def visitFor(self,ast,param):
     pass
 
   def visitContinue(self,ast,param):
-    pass
+    if For not in self.stackscope: 
+      raise MustInLoop(ast)
 
   def visitBreak(self,ast,param):
-    pass
+    if For not in self.stackscope: 
+      raise MustInLoop(ast)
 
   def visitReturn(self,ast,param):
     pass
@@ -488,7 +601,7 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
     return VoidType()
 
   def visitArrayType(self, ast, c):
-    return ArrayType(ast.size, self.visit(ast.eleType, c))
+    return ArrayType(int(ast.size), self.visit(ast.eleType, c))
 
   def visitClassType(self, ast, c):
     target_class = self.searchClassByName(ast.classname.name, self.global_env)
@@ -513,5 +626,14 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
   def visitSelfLiteral(self,ast,param):
     return None 
       
-  def visitArrayLiteral(self,ast,param):
-    return None 
+  def visitArrayLiteral(self,ast,visibleScope):
+    if len(ast.value) == 0:
+      return ArrayType(0, None)
+    root_type = self.visit(ast.value[0], visibleScope)
+    if len(ast.value) == 1:
+      return ArrayType(1, root_type)
+    for value in ast.value[1:]:
+      valuetype = self.visit(value, visibleScope)
+      if not self.checkTypeMatch(valuetype, root_type, self.global_env):
+        raise IllegalArrayLiteral(ast)
+    return ArrayType(len(ast.value), root_type)
