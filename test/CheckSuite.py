@@ -1040,7 +1040,7 @@ class CheckSuite(unittest.TestCase):
     #       func @main():void {
     #         var x: [3]float;
     #         var y: A = new A();
-    #         y.a := [1, 2, 3.5];
+    #         y.a := [1, 2, 3];
     #         y.b[1] := 2;
 
     #       }
@@ -1059,7 +1059,7 @@ class CheckSuite(unittest.TestCase):
     #       func @main():void {
     #         var x: [3]float;
     #         var y: A = new A();
-    #         y.a := [1, 2, 3.5];
+    #         y.a := [1, 2, 3];
     #         y.a["hello"] := 2;
 
     #       }
@@ -1159,3 +1159,186 @@ class CheckSuite(unittest.TestCase):
     #     """
     #     expect = "Undeclared Identifier: a"
     #     self.assertTrue(TestChecker.test(input,expect,681))
+
+    # def test_for(self):
+    #     input = """
+    #     class Program {
+    #         func @main():void {
+    #             var x: int;
+    #             for x:=0; x + 10; x:= x+1 {
+    #                 x:= 1;
+    #             }
+    #         }
+    #     }
+    #     """
+    #     expect = "Type Mismatch In Statement: For(AssignStmt(Id(x),IntLit(0)),BinaryOp(+,Id(x),IntLit(10)),AssignStmt(Id(x),BinaryOp(+,Id(x),IntLit(1))),Block([AssignStmt(Id(x),IntLit(1))])])"
+    #     self.assertTrue(TestChecker.test(input,expect,682))
+
+    # def test_continue_in_loop(self):
+    #     input = """
+    #     class Program {
+    #         func @main():void {
+    #             var x: int;
+    #             for x:=0; x < 10; x:= x+1 {
+    #                 x:= 1;
+    #             }
+    #             continue;
+    #         }
+    #     }
+    #     """
+    #     expect = "Continue Not In Loop"
+    #     self.assertTrue(TestChecker.test(input,expect,683))
+
+    # def test_continue_in_loop2(self):
+    #     input = """
+    #     class Program {
+    #         func @main():void {
+    #             var x: int;
+    #             for x:=0; x < 10; x:= x+1 {
+    #                 if {x := 1;} x > 1 {
+    #                     x := x - 1;
+    #                     continue;   
+    #                 } else {
+    #                     x := a + 1;
+    #                 }
+    #             }
+    #         }
+    #     }
+    #     """
+    #     expect = "Undeclared Identifier: a"
+    #     self.assertTrue(TestChecker.test(input,expect,684))
+
+    # def test_continue_in_loop3(self):
+    #     input = """
+    #     class Program {
+    #         func @main():void {
+    #             var x: int;
+    #             if {x := 1;} x > 1 {
+    #                 x := x - 1;
+    #                 continue;   
+    #             } else {
+    #                 x := a + 1;
+    #             }
+    #         }
+    #     }
+    #     """
+    #     expect = "Continue Not In Loop"
+    #     self.assertTrue(TestChecker.test(input,expect,685))
+
+    # def test_return(self):
+    #     input = """
+    #     class Program {
+    #         func @main():void {
+    #             return 0;
+    #         }
+    #     }
+    #     """
+    #     expect = "Type Mismatch In Statement: Return(IntLit(0))"
+    #     self.assertTrue(TestChecker.test(input,expect,686))
+
+    # def test_return2(self):
+    #     input = """
+    #     class Program {
+    #         func @main():void {
+    #         }
+    #     }
+    #     class A {
+    #         func a():int {
+    #             return 1.5;
+    #         }
+    #     }
+    #     """
+    #     expect = "Type Mismatch In Statement: Return(FloatLit(1.5))"
+    #     self.assertTrue(TestChecker.test(input,expect,687))
+
+    # def test_return3(self):
+    #     input = """
+    #     class Program {
+    #         func @main():void {
+    #             var b: B;
+    #             var x: A;
+    #             x := b.c();
+    #         }
+    #     }
+    #     class A {
+    #         func a():int {
+    #             return 1.5;
+    #         }
+    #     }
+    #     class B {
+    #         func c(): A {
+    #             var a: A;
+    #             return a;
+    #         }
+    #     }
+    #     """
+    #     expect = "Type Mismatch In Statement: Return(FloatLit(1.5))"
+    #     self.assertTrue(TestChecker.test(input,expect,688))
+
+    # def test_self(self):
+    #     input = """
+    #     class Program {
+    #         func @main():void {
+    #             a := 1;
+    #         }
+    #         var a:int;
+    #     }
+    #     """
+    #     expect = "Undeclared Identifier: a"
+    #     self.assertTrue(TestChecker.test(input,expect,689))
+
+    # def test_self2(self):
+    #     input = """
+    #     class Program {
+    #         func @main():void {
+    #             self.a := 1.2;
+    #         }
+    #         var a:int;
+    #     }
+    #     """
+    #     expect = "Type Mismatch In Statement: AssignStmt(FieldAccess(Self(),Id(a)),FloatLit(1.2))"
+    #     self.assertTrue(TestChecker.test(input,expect,690))
+
+    # def test_sth1(self):
+    #     input = """
+    #     class Program {
+    #         func @main():void {
+    #             var x: A = new A();
+    #             x.a := 1;
+    #         }
+    #     }
+    #     class B <- A {}
+    #     class B {
+    #         var a:int;
+    #     }
+    #     """
+    #     expect = ""
+    #     self.assertTrue(TestChecker.test(input,expect,691))
+
+    # def test_sth2(self):
+    #     input = """
+    #     class Program {
+    #         func @main(): void {
+    #         }
+    #     }
+    #     class A {
+    #         var b:int = 0;
+    #         var a:int = b + 1;
+    #     }
+    #     """
+    #     expect = "Undeclared Identifier: b"
+    #     self.assertTrue(TestChecker.test(input,expect,692))
+
+    # def test_sth3(self):
+    #     input = """
+    #     class Program {
+    #         func @main(): void {
+    #         }
+    #     }
+    #     class A {
+    #         var a:int = -b;
+    #         var b:int = 0;
+    #     }
+    #     """
+    #     expect = "Undeclared Identifier: b"
+    #     self.assertTrue(TestChecker.test(input,expect,693))

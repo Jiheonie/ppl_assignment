@@ -149,6 +149,10 @@ class GetEnv(BaseVisitor, Utils, SupportUtils):
     if not has_entry_point: raise NoEntryPoint()
 
     for decl in ast.decl:
+      self.global_env += [BKClass(decl.classname.name, decl.parentname.name if decl.parentname else None, [])]
+
+    for decl in ast.decl:
+      self.global_env.pop(9)
       self.visit(decl, self.global_env)
 
     return self.global_env
@@ -163,6 +167,8 @@ class GetEnv(BaseVisitor, Utils, SupportUtils):
   def visitMethodDecl(self, ast:MethodDecl, classScope):
     param_types = [self.visit(param.varType, self.global_env) for param in ast.param]
     ret_type = self.visit(ast.returnType, self.global_env)
+    if isinstance(ret_type, ClassType):
+      ret_type = Instance(ret_type)
     if ast.name.name != "constructor":
       if "@" not in ast.name.name:
         if ast.name.name in map(lambda x: x.name, classScope[0]): 
@@ -231,6 +237,8 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
     self.ast = ast
     self.global_env = []
     self.stackscope = []
+    self.checkingReturnType = []
+    self.checkingClass = []
 
   def check(self):
     self.visit(self.ast, self.global_env)
@@ -241,24 +249,30 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
     reduce(lambda c_pre, decl: self.visit(decl, c_pre), ast.decl, self.global_env)
 
   def visitClassDecl(self, ast, globalScope):
-    # reduce(lambda c_pre, mem_cur: self.visit(mem_cur, c_pre), ast.memlist, globalScope)
     for mem in ast.memlist:
-      self.visit(mem, globalScope)
+      target_class = self.searchClassByName(ast.classname.name, self.global_env)
+      self.checkingClass.append(target_class)
+      self.visit(mem, self.global_env)
+      self.checkingClass.pop()
   
   def visitMethodDecl(self, ast, globalScope):
+    rettype = self.visit(ast.returnType, None)
+    if isinstance(rettype, ClassType):
+      rettype = Instance(rettype)
+    self.checkingReturnType.append(rettype)
     env = [[]] # => [List[{name, typ, isMu}]]
     if len(ast.param) > 0:
       env = reduce(lambda env_pre, decl: self.visit(decl, ("param", env_pre)), ast.param, env)
     self.stackscope.append(MethodDecl)
-    self.visit(ast.body, env + [globalScope])
+    self.visit(ast.body, env + [self.global_env])
+    self.checkingReturnType.pop()
     self.stackscope.pop()
 
   def visitAttributeDecl(self, ast, globalScope): 
-    self.visit(ast.decl, ("var" if isinstance(ast.decl, VarDecl) else "const", [[], globalScope]))
+    self.visit(ast.decl, ("var" if isinstance(ast.decl, VarDecl) else "const", [[], self.global_env]))
 
   # (decltype, [[local]...[global]])
   def visitVarDecl(self, ast, visibleScope):
-    # chua test type la Instance
     if ast.variable.name in map(lambda decl: decl["name"], visibleScope[1][0]):
       if visibleScope[0] == "var":
         raise Redeclared(Variable(), ast.variable.name)
@@ -304,6 +318,15 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
   def visitBinaryOp(self, ast, visibleScope):
     lType = self.visit(ast.left, visibleScope)
     rType = self.visit(ast.right, visibleScope)
+    if isinstance(ast.left, Id):
+      decl = self.searchLocalIdByName(ast.left.name, visibleScope) 
+      if not decl:
+        raise Undeclared(Identifier(), ast.left.name) 
+    if isinstance(ast.right, Id):
+      decl = self.searchLocalIdByName(ast.right.name, visibleScope) 
+      if not decl:
+        raise Undeclared(Identifier(), ast.right.name) 
+      
     if ast.op in ["+", "-", "*"]:
       if not isinstance(lType, IntType) and not isinstance(lType, FloatType):
         raise TypeMismatchInExpression(ast) #
@@ -353,8 +376,13 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
         raise TypeMismatchInExpression(ast) #
       return BoolType()
 
-  def visitUnaryOp(self,ast,param):
+  def visitUnaryOp(self, ast, visibleScope):
     bodyType = self.visit(ast.body, visibleScope)
+    if isinstance(ast.body, Id):
+      decl = self.searchLocalIdByName(ast.body.name, visibleScope) 
+      if not decl:
+        raise Undeclared(Identifier(), ast.body.name) 
+      
     if ast.op == "-":
       if isinstance(bodyType, IntType):
         return IntType()
@@ -369,8 +397,8 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
 
   def visitNewExpr(self,ast,visibleScope):
     classtype = self.visit(ast.classname, visibleScope)
-    if len(ast.param) == 0:
-      return Instance(classtype)
+    # if len(ast.param) == 0:
+    #   return Instance(classtype)
     constructor_list = self.getConstructorList(classtype.classname.name, self.global_env)
     has_found = False
     for constructor in constructor_list:
@@ -413,7 +441,7 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
     searchedDecl = self.searchLocalIdByName(ast.name, visibleScope)
     if searchedDecl: 
       return searchedDecl["typ"]
-    for decl in visibleScope[-1]: # => [BKClass, StaticMember]
+    for decl in self.global_env: # => [BKClass, StaticMember]
       if isinstance(decl, BKClass):
         if decl.name == ast.name: return ClassType(Id(decl.name))
         for memdecl in decl.member:
@@ -585,33 +613,40 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
     env = visibleScope
     if ast.preStmt:
       env = self.visit(ast.preStmt, visibleScope)
-    # print(env)
     expr_type = self.visit(ast.expr, env)
-    print(expr_type)
-    print(isinstance(expr_type, BoolType))
     if not isinstance(expr_type, BoolType):
-      raise TypeMismatchInStatement(ast) #
+      raise TypeMismatchInStatement(ast) # tested 679
     self.stackscope.append(If)
     self.visit(ast.thenStmt, env)
     if ast.elseStmt:
       self.visit(ast.elseStmt, env)
     self.stackscope.pop()
   
-  def visitFor(self,ast,param):
-    pass
+  def visitFor(self, ast, visibleScope):
+    self.visit(ast.initStmt, visibleScope)
+    expr_type = self.visit(ast.expr, visibleScope)
+    if not isinstance(expr_type, BoolType):
+      raise TypeMismatchInStatement(ast) # tested 682
+    self.visit(ast.postStmt, visibleScope)
+    self.stackscope.append(For)
+    self.visit(ast.loop, visibleScope)
+    self.stackscope.pop()
 
   def visitContinue(self,ast,param):
     if For not in self.stackscope: 
-      raise MustInLoop(ast) #
+      raise MustInLoop(ast) # tested 683
 
   def visitBreak(self,ast,param):
     if For not in self.stackscope: 
       raise MustInLoop(ast) #
 
-  def visitReturn(self,ast,param):
-    pass
-
-  
+  def visitReturn(self, ast, visibleScope):
+    exprtype = VoidType()
+    if ast.expr:
+      exprtype = self.visit(ast.expr, visibleScope)
+    if not self.checkTypeMatch(self.checkingReturnType[-1], exprtype, self.global_env):
+      raise TypeMismatchInStatement(ast) # tested 687 
+    
   def visitIntType(self, ast, param):
     return IntType()
 
@@ -650,8 +685,9 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
   def visitNullLiteral(self,ast,param):
     return None
   
-  def visitSelfLiteral(self,ast,param):
-    return None 
+  def visitSelfLiteral(self, ast, visibleScope):
+    target_class = self.checkingClass[-1] # BKClass
+    return Instance(ClassType(Id(target_class.name)))
       
   def visitArrayLiteral(self,ast,visibleScope):
     if len(ast.value) == 0:
