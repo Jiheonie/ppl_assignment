@@ -117,11 +117,17 @@ class SupportUtils:
 
 class GetEnv(BaseVisitor, Utils, SupportUtils):
   def __init__(self):
-    self.io = BKClass("io", None, [
-      Member("@readInt", MType([], IntType()), False),
-      Member("@writeIntLn", MType([IntType()], VoidType()), False),
-    ])
-    self.global_env = [self.io] # => List[BKClass]
+    self.io = [BKClass("io", None, []),
+      StaticMember("io", "@readInt", MType([], IntType()), False),
+      StaticMember("io", "@writeInt", MType([IntType()], VoidType()), False),
+      StaticMember("io", "@readFloat", MType([], FloatType()), False),
+      StaticMember("io", "@writeFloat", MType([FloatType()], VoidType()), False),
+      StaticMember("io", "@readBool", MType([], BoolType()), False),
+      StaticMember("io", "@writeBool", MType([BoolType()], VoidType()), False),
+      StaticMember("io", "@readStr", MType([], StringType()), False),
+      StaticMember("io", "@writeStr", MType([StringType()], VoidType()), False),
+    ]
+    self.global_env = self.io # => List[BKClass, StaticMember]
 
   def visitProgram(self, ast:Program, c):
     class_name = [classdecl.classname.name for classdecl in ast.decl]
@@ -144,6 +150,7 @@ class GetEnv(BaseVisitor, Utils, SupportUtils):
 
     for decl in ast.decl:
       self.visit(decl, self.global_env)
+
     return self.global_env
 
   def visitClassDecl(self, ast:ClassDecl, globalScope):
@@ -634,6 +641,6 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
       return ArrayType(1, root_type)
     for value in ast.value[1:]:
       valuetype = self.visit(value, visibleScope)
-      if not self.checkTypeMatch(valuetype, root_type, self.global_env):
-        raise IllegalArrayLiteral(ast)
+      if not self.checkTypeMatch(root_type, valuetype, self.global_env):
+        raise IllegalArrayLiteral(ast) # tested 677
     return ArrayType(len(ast.value), root_type)

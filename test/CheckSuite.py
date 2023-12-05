@@ -1084,3 +1084,14 @@ class CheckSuite(unittest.TestCase):
     #     """
     #     expect = "Type Mismatch In Expression: BinaryOp(+,Id(x),Id(y))"
     #     self.assertTrue(TestChecker.test(input,expect,676))
+
+    # def test_illegal_literal(self):
+    #     input = """
+    #     class Program {
+    #       func @main() :void {
+    #         var x: [3]int = [1,2,2.3];
+    #       }
+    #     }
+    #     """
+    #     expect = "Illegal Array Literal: [IntLit(1),IntLit(2),FloatLit(2.3)]"
+    #     self.assertTrue(TestChecker.test(input,expect,677))
