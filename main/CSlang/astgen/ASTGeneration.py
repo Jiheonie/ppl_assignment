@@ -430,7 +430,7 @@ class ASTGeneration(CSlangVisitor):
     return If(
       self.visit(ctx.exp()), 
       self.visit(ctx.block_stmt(1)), 
-      self.visit(ctx.block_stmt(1)), 
+      self.visit(ctx.block_stmt(0)), 
       self.visit(ctx.block_stmt(2))
     )
 

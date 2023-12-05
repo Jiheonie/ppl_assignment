@@ -241,7 +241,9 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
     reduce(lambda c_pre, decl: self.visit(decl, c_pre), ast.decl, self.global_env)
 
   def visitClassDecl(self, ast, globalScope):
-    reduce(lambda c_pre, mem_cur: self.visit(mem_cur, c_pre), ast.memlist, globalScope)
+    # reduce(lambda c_pre, mem_cur: self.visit(mem_cur, c_pre), ast.memlist, globalScope)
+    for mem in ast.memlist:
+      self.visit(mem, globalScope)
   
   def visitMethodDecl(self, ast, globalScope):
     env = [[]] # => [List[{name, typ, isMu}]]
@@ -343,6 +345,13 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
       if isinstance(rType, BoolType) and not isinstance(rType, BoolType):
         raise TypeMismatchInExpression(ast) #
       return BoolType()
+    
+    if ast.op in ["<", ">", "<=", ">="]:
+      if not isinstance(lType, IntType) and not isinstance(lType, FloatType):
+        raise TypeMismatchInExpression(ast) #
+      if not isinstance(rType, IntType) and not isinstance(rType, FloatType):
+        raise TypeMismatchInExpression(ast) #
+      return BoolType()
 
   def visitUnaryOp(self,ast,param):
     bodyType = self.visit(ast.body, visibleScope)
@@ -390,13 +399,14 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
       raise TypeMismatchInExpression(ast) # tested 675
     return arrtype.eleType
     
-  def visitBlock(self, ast, visibleScope): # [[param],...,[global]]
+  def visitBlock(self, ast, visibleScope): # [[local],...,[global]]
     decl_block = [stmt for stmt in ast.stmt if isinstance(stmt, StoreDecl)]
     stmt_block = [stmt for stmt in ast.stmt if not isinstance(stmt, StoreDecl)]
     env = [[]] + visibleScope
     env = reduce(lambda env_pre, decl: self.visit(decl, ("var" if isinstance(decl, VarDecl) else "const", env_pre)), decl_block, env)
     for stmt in stmt_block:
       self.visit(stmt, env)
+    return env
 
   # visibleScope => [[local],...,[global]]
   def visitId(self, ast, visibleScope):
@@ -418,6 +428,8 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
     rt = self.visit(ast.exp, visibleScope) 
     if isinstance(ast.lhs, Id):
       decl = self.searchLocalIdByName(ast.lhs.name, visibleScope) 
+      if not decl:
+        raise Undeclared(Identifier(), ast.lhs.name) # tested 678
       if not decl["isMu"]: 
         raise CannotAssignToConstant(ast) # tested 639
     if isinstance(ast.lhs, FieldAccess):
@@ -570,11 +582,19 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
   
   # [[local]...[global]]
   def visitIf(self, ast, visibleScope):
-    env = [[]] + visibleScope
-    # if ast.preStmt:
-      
+    env = visibleScope
+    if ast.preStmt:
+      env = self.visit(ast.preStmt, visibleScope)
+    # print(env)
+    expr_type = self.visit(ast.expr, env)
+    print(expr_type)
+    print(isinstance(expr_type, BoolType))
+    if not isinstance(expr_type, BoolType):
+      raise TypeMismatchInStatement(ast) #
     self.stackscope.append(If)
-
+    self.visit(ast.thenStmt, env)
+    if ast.elseStmt:
+      self.visit(ast.elseStmt, env)
     self.stackscope.pop()
   
   def visitFor(self,ast,param):
@@ -582,11 +602,11 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
 
   def visitContinue(self,ast,param):
     if For not in self.stackscope: 
-      raise MustInLoop(ast)
+      raise MustInLoop(ast) #
 
   def visitBreak(self,ast,param):
     if For not in self.stackscope: 
-      raise MustInLoop(ast)
+      raise MustInLoop(ast) #
 
   def visitReturn(self,ast,param):
     pass

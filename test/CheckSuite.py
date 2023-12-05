@@ -1095,3 +1095,67 @@ class CheckSuite(unittest.TestCase):
     #     """
     #     expect = "Illegal Array Literal: [IntLit(1),IntLit(2),FloatLit(2.3)]"
     #     self.assertTrue(TestChecker.test(input,expect,677))
+
+    # def test_if(self):
+    #     input = """
+    #     class Program {
+    #         var x:int;
+    #         func @main():void {
+    #             if {x := 1;} x + 1 {
+    #                 x := x - 1;
+    #             } else {
+    #                 x := x + 1;
+    #             }
+    #         }
+    #     }
+    #     """
+    #     expect = "Undeclared Identifier: x"
+    #     self.assertTrue(TestChecker.test(input,expect,678))
+
+    # def test_if2(self):
+    #     input = """
+    #     class Program {
+    #         func @main():void {
+    #             var x:int;
+    #             if {x := 1;} x + 1 {
+    #                 x := i - 1;
+    #             } else {
+    #                 x := x + 1;
+    #             }
+    #         }
+    #     }
+    #     """
+    #     expect = "Type Mismatch In Statement: If(Block([AssignStmt(Id(x),IntLit(1))]),BinaryOp(+,Id(x),IntLit(1)),Block([AssignStmt(Id(x),BinaryOp(-,Id(i),IntLit(1)))]),Block([AssignStmt(Id(x),BinaryOp(+,Id(x),IntLit(1)))]))"
+    #     self.assertTrue(TestChecker.test(input,expect,679))
+
+    # def test_if3(self):
+    #     input = """
+    #     class Program {
+    #         func @main():void {
+    #             var x:int;
+    #             if {x := 1;} x > 1 {
+    #                 x := i - 1;
+    #             } else {
+    #                 x := a + 1;
+    #             }
+    #         }
+    #     }
+    #     """
+    #     expect = "Undeclared Identifier: i"
+    #     self.assertTrue(TestChecker.test(input,expect,680))
+
+    # def test_if4(self):
+    #     input = """
+    #     class Program {
+    #         func @main():void {
+    #             var x:int;
+    #             if {x := 1;} x > 1 {
+    #                 x := x - 1;
+    #             } else {
+    #                 x := a + 1;
+    #             }
+    #         }
+    #     }
+    #     """
+    #     expect = "Undeclared Identifier: a"
+    #     self.assertTrue(TestChecker.test(input,expect,681))
