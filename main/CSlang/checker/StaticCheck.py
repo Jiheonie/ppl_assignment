@@ -127,7 +127,8 @@ class GetEnv(BaseVisitor, Utils, SupportUtils):
       StaticMember("io", "@readStr", MType([], StringType()), False),
       StaticMember("io", "@writeStr", MType([StringType()], VoidType()), False),
     ]
-    self.global_env = self.io # => List[BKClass, StaticMember]
+    self.global_env = [] + self.io # => List[BKClass, StaticMember]
+    self.hold_class = []
 
   def visitProgram(self, ast:Program, c):
     class_name = [classdecl.classname.name for classdecl in ast.decl]
@@ -152,7 +153,9 @@ class GetEnv(BaseVisitor, Utils, SupportUtils):
       self.global_env += [BKClass(decl.classname.name, decl.parentname.name if decl.parentname else None, [])]
 
     for decl in ast.decl:
+      self.hold_class.append(self.global_env[9])
       self.global_env.pop(9)
+
       self.visit(decl, self.global_env)
 
     return self.global_env
@@ -160,8 +163,12 @@ class GetEnv(BaseVisitor, Utils, SupportUtils):
   def visitClassDecl(self, ast:ClassDecl, globalScope):
     if ast.classname.name in map(lambda x: x.name, globalScope): 
       raise Redeclared(Class(), ast.classname.name)
+    self.global_env.append(self.hold_class[-1])
+    idx = len(self.global_env)
+    self.hold_class.pop()
     env = [[], ast.classname.name]
     env = reduce(lambda env_pre, mem_cur: self.visit(mem_cur, env_pre), ast.memlist, env)
+    self.global_env.pop(idx-1)
     self.global_env += [BKClass(ast.classname.name, ast.parentname.name if ast.parentname else None, env[0])]
 
   def visitMethodDecl(self, ast:MethodDecl, classScope):
@@ -228,6 +235,8 @@ class GetEnv(BaseVisitor, Utils, SupportUtils):
 
   def visitClassType(self, ast, c):
     target_class = self.searchClassByName(ast.classname.name, self.global_env)
+    # print([mem.name for mem in self.global_env])
+    # print(target_class)
     if target_class: return ClassType(ast.classname)
     raise Undeclared(Class(), ast.classname.name)
   
@@ -397,8 +406,6 @@ class StaticChecker(BaseVisitor, Utils, SupportUtils):
 
   def visitNewExpr(self,ast,visibleScope):
     classtype = self.visit(ast.classname, visibleScope)
-    # if len(ast.param) == 0:
-    #   return Instance(classtype)
     constructor_list = self.getConstructorList(classtype.classname.name, self.global_env)
     has_found = False
     for constructor in constructor_list:

@@ -411,14 +411,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_program
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterProgram" ):
-                listener.enterProgram(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitProgram" ):
-                listener.exitProgram(self)
-
 
 
 
@@ -458,14 +450,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_prog_decl_list
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterProg_decl_list" ):
-                listener.enterProg_decl_list(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitProg_decl_list" ):
-                listener.exitProg_decl_list(self)
 
 
 
@@ -521,14 +505,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_exp
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExp" ):
-                listener.enterExp(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExp" ):
-                listener.exitExp(self)
 
 
 
@@ -602,14 +578,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_exp1
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExp1" ):
-                listener.enterExp1(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExp1" ):
-                listener.exitExp1(self)
-
 
 
 
@@ -676,14 +644,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_exp2
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExp2" ):
-                listener.enterExp2(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExp2" ):
-                listener.exitExp2(self)
 
 
 
@@ -759,14 +719,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_exp3
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExp3" ):
-                listener.enterExp3(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExp3" ):
-                listener.exitExp3(self)
 
 
 
@@ -846,14 +798,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_exp4
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExp4" ):
-                listener.enterExp4(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExp4" ):
-                listener.exitExp4(self)
-
 
 
     def exp4(self, _p:int=0):
@@ -926,14 +870,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_exp5
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExp5" ):
-                listener.enterExp5(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExp5" ):
-                listener.exitExp5(self)
-
 
 
 
@@ -990,14 +926,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_exp6
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExp6" ):
-                listener.enterExp6(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExp6" ):
-                listener.exitExp6(self)
-
 
 
 
@@ -1050,14 +978,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_exp7
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExp7" ):
-                listener.enterExp7(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExp7" ):
-                listener.exitExp7(self)
 
 
 
@@ -1125,14 +1045,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_exp8
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExp8" ):
-                listener.enterExp8(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExp8" ):
-                listener.exitExp8(self)
 
 
 
@@ -1223,14 +1135,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_exp9
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExp9" ):
-                listener.enterExp9(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExp9" ):
-                listener.exitExp9(self)
-
 
 
 
@@ -1301,14 +1205,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_exp10
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExp10" ):
-                listener.enterExp10(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExp10" ):
-                listener.exitExp10(self)
 
 
 
@@ -1386,14 +1282,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_literal
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterLiteral" ):
-                listener.enterLiteral(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitLiteral" ):
-                listener.exitLiteral(self)
-
 
 
 
@@ -1449,14 +1337,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_ele_literal
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterEle_literal" ):
-                listener.enterEle_literal(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitEle_literal" ):
-                listener.exitEle_literal(self)
-
 
 
 
@@ -1503,14 +1383,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_ele_literal_list
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterEle_literal_list" ):
-                listener.enterEle_literal_list(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitEle_literal_list" ):
-                listener.exitEle_literal_list(self)
 
 
 
@@ -1562,14 +1434,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_exp_list
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExp_list" ):
-                listener.enterExp_list(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExp_list" ):
-                listener.exitExp_list(self)
 
 
 
@@ -1623,14 +1487,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_exp_prime
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExp_prime" ):
-                listener.enterExp_prime(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExp_prime" ):
-                listener.exitExp_prime(self)
 
 
 
@@ -1686,14 +1542,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_func_type
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterFunc_type" ):
-                listener.enterFunc_type(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitFunc_type" ):
-                listener.exitFunc_type(self)
-
 
 
 
@@ -1744,14 +1592,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_ref_type
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterRef_type" ):
-                listener.enterRef_type(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitRef_type" ):
-                listener.exitRef_type(self)
 
 
 
@@ -1809,14 +1649,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_array_type
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterArray_type" ):
-                listener.enterArray_type(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitArray_type" ):
-                listener.exitArray_type(self)
-
 
 
 
@@ -1859,14 +1691,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_ele_type
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterEle_type" ):
-                listener.enterEle_type(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitEle_type" ):
-                listener.exitEle_type(self)
 
 
 
@@ -1923,14 +1747,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_value_type
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterValue_type" ):
-                listener.enterValue_type(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitValue_type" ):
-                listener.exitValue_type(self)
-
 
 
 
@@ -1970,14 +1786,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_prog_decl
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterProg_decl" ):
-                listener.enterProg_decl(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitProg_decl" ):
-                listener.exitProg_decl(self)
 
 
 
@@ -2030,14 +1838,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_class_decl
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterClass_decl" ):
-                listener.enterClass_decl(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitClass_decl" ):
-                listener.exitClass_decl(self)
 
 
 
@@ -2110,14 +1910,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_class_mem_list
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterClass_mem_list" ):
-                listener.enterClass_mem_list(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitClass_mem_list" ):
-                listener.exitClass_mem_list(self)
-
 
 
 
@@ -2169,14 +1961,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_class_mem
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterClass_mem" ):
-                listener.enterClass_mem(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitClass_mem" ):
-                listener.exitClass_mem(self)
 
 
 
@@ -2237,14 +2021,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_obj_cre
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterObj_cre" ):
-                listener.enterObj_cre(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitObj_cre" ):
-                listener.exitObj_cre(self)
-
 
 
 
@@ -2303,14 +2079,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_inst_method_access
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterInst_method_access" ):
-                listener.enterInst_method_access(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitInst_method_access" ):
-                listener.exitInst_method_access(self)
-
 
 
 
@@ -2358,14 +2126,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_static_access
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterStatic_access" ):
-                listener.enterStatic_access(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitStatic_access" ):
-                listener.exitStatic_access(self)
 
 
 
@@ -2418,14 +2178,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_static_mem_access
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterStatic_mem_access" ):
-                listener.enterStatic_mem_access(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitStatic_mem_access" ):
-                listener.exitStatic_mem_access(self)
 
 
 
@@ -2487,14 +2239,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_static_method_access
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterStatic_method_access" ):
-                listener.enterStatic_method_access(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitStatic_method_access" ):
-                listener.exitStatic_method_access(self)
-
 
 
 
@@ -2550,14 +2294,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_self_access
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterSelf_access" ):
-                listener.enterSelf_access(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitSelf_access" ):
-                listener.exitSelf_access(self)
-
 
 
 
@@ -2612,14 +2348,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_self_mem_access
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterSelf_mem_access" ):
-                listener.enterSelf_mem_access(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitSelf_mem_access" ):
-                listener.exitSelf_mem_access(self)
 
 
 
@@ -2683,14 +2411,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_self_method_access
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterSelf_method_access" ):
-                listener.enterSelf_method_access(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitSelf_method_access" ):
-                listener.exitSelf_method_access(self)
-
 
 
 
@@ -2748,14 +2468,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_method_decl
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterMethod_decl" ):
-                listener.enterMethod_decl(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitMethod_decl" ):
-                listener.exitMethod_decl(self)
 
 
 
@@ -2816,14 +2528,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_func_decl
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterFunc_decl" ):
-                listener.enterFunc_decl(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitFunc_decl" ):
-                listener.exitFunc_decl(self)
-
 
 
 
@@ -2867,14 +2571,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_static_func_decl
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterStatic_func_decl" ):
-                listener.enterStatic_func_decl(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitStatic_func_decl" ):
-                listener.exitStatic_func_decl(self)
 
 
 
@@ -2930,14 +2626,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_expo_func
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExpo_func" ):
-                listener.enterExpo_func(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExpo_func" ):
-                listener.exitExpo_func(self)
 
 
 
@@ -2999,14 +2687,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_constructor_decl
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterConstructor_decl" ):
-                listener.enterConstructor_decl(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitConstructor_decl" ):
-                listener.exitConstructor_decl(self)
-
 
 
 
@@ -3054,14 +2734,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_attr_decl
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterAttr_decl" ):
-                listener.enterAttr_decl(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitAttr_decl" ):
-                listener.exitAttr_decl(self)
 
 
 
@@ -3116,14 +2788,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_const_decl
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterConst_decl" ):
-                listener.enterConst_decl(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitConst_decl" ):
-                listener.exitConst_decl(self)
-
 
 
 
@@ -3168,14 +2832,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_var_decl
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterVar_decl" ):
-                listener.enterVar_decl(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitVar_decl" ):
-                listener.exitVar_decl(self)
-
 
 
 
@@ -3217,14 +2873,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_attr_decl_body
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterAttr_decl_body" ):
-                listener.enterAttr_decl_body(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitAttr_decl_body" ):
-                listener.exitAttr_decl_body(self)
 
 
 
@@ -3279,14 +2927,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_attr_decl_body_short
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterAttr_decl_body_short" ):
-                listener.enterAttr_decl_body_short(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitAttr_decl_body_short" ):
-                listener.exitAttr_decl_body_short(self)
 
 
 
@@ -3351,14 +2991,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_attr_decl_body_full
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterAttr_decl_body_full" ):
-                listener.enterAttr_decl_body_full(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitAttr_decl_body_full" ):
-                listener.exitAttr_decl_body_full(self)
 
 
 
@@ -3442,14 +3074,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_identifier_list
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterIdentifier_list" ):
-                listener.enterIdentifier_list(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitIdentifier_list" ):
-                listener.exitIdentifier_list(self)
 
 
 
@@ -3544,14 +3168,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_stmt
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterStmt" ):
-                listener.enterStmt(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitStmt" ):
-                listener.exitStmt(self)
-
 
 
 
@@ -3641,14 +3257,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_decl_stmt
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterDecl_stmt" ):
-                listener.enterDecl_stmt(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitDecl_stmt" ):
-                listener.exitDecl_stmt(self)
-
 
 
 
@@ -3702,14 +3310,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_const_decl_stmt
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterConst_decl_stmt" ):
-                listener.enterConst_decl_stmt(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitConst_decl_stmt" ):
-                listener.exitConst_decl_stmt(self)
-
 
 
 
@@ -3754,14 +3354,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_var_decl_stmt
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterVar_decl_stmt" ):
-                listener.enterVar_decl_stmt(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitVar_decl_stmt" ):
-                listener.exitVar_decl_stmt(self)
-
 
 
 
@@ -3803,14 +3395,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_decl_stmt_body
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterDecl_stmt_body" ):
-                listener.enterDecl_stmt_body(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitDecl_stmt_body" ):
-                listener.exitDecl_stmt_body(self)
 
 
 
@@ -3865,14 +3449,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_decl_stmt_body_short
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterDecl_stmt_body_short" ):
-                listener.enterDecl_stmt_body_short(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitDecl_stmt_body_short" ):
-                listener.exitDecl_stmt_body_short(self)
 
 
 
@@ -3934,14 +3510,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_decl_stmt_body_full
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterDecl_stmt_body_full" ):
-                listener.enterDecl_stmt_body_full(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitDecl_stmt_body_full" ):
-                listener.exitDecl_stmt_body_full(self)
 
 
 
@@ -4013,14 +3581,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_assign_stmt
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterAssign_stmt" ):
-                listener.enterAssign_stmt(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitAssign_stmt" ):
-                listener.exitAssign_stmt(self)
-
 
 
 
@@ -4071,14 +3631,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_if_stmt
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterIf_stmt" ):
-                listener.enterIf_stmt(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitIf_stmt" ):
-                listener.exitIf_stmt(self)
 
 
 
@@ -4157,14 +3709,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_for_stmt
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterFor_stmt" ):
-                listener.enterFor_stmt(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitFor_stmt" ):
-                listener.exitFor_stmt(self)
-
 
 
 
@@ -4213,14 +3757,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_break_stmt
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterBreak_stmt" ):
-                listener.enterBreak_stmt(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitBreak_stmt" ):
-                listener.exitBreak_stmt(self)
-
 
 
 
@@ -4258,14 +3794,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_continue_stmt
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterContinue_stmt" ):
-                listener.enterContinue_stmt(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitContinue_stmt" ):
-                listener.exitContinue_stmt(self)
 
 
 
@@ -4308,14 +3836,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_return_stmt
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterReturn_stmt" ):
-                listener.enterReturn_stmt(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitReturn_stmt" ):
-                listener.exitReturn_stmt(self)
 
 
 
@@ -4372,14 +3892,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_method_invocation_stmt
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterMethod_invocation_stmt" ):
-                listener.enterMethod_invocation_stmt(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitMethod_invocation_stmt" ):
-                listener.exitMethod_invocation_stmt(self)
 
 
 
@@ -4440,14 +3952,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_block_stmt
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterBlock_stmt" ):
-                listener.enterBlock_stmt(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitBlock_stmt" ):
-                listener.exitBlock_stmt(self)
-
 
 
 
@@ -4489,14 +3993,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_body
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterBody" ):
-                listener.enterBody(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitBody" ):
-                listener.exitBody(self)
 
 
 
@@ -4545,14 +4041,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_params_list
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterParams_list" ):
-                listener.enterParams_list(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitParams_list" ):
-                listener.exitParams_list(self)
 
 
 
@@ -4606,14 +4094,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_params_prime
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterParams_prime" ):
-                listener.enterParams_prime(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitParams_prime" ):
-                listener.exitParams_prime(self)
 
 
 
@@ -4673,14 +4153,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_params_1_type
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterParams_1_type" ):
-                listener.enterParams_1_type(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitParams_1_type" ):
-                listener.exitParams_1_type(self)
-
 
 
 
@@ -4724,14 +4196,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_id_list_not_null
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterId_list_not_null" ):
-                listener.enterId_list_not_null(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitId_list_not_null" ):
-                listener.exitId_list_not_null(self)
 
 
 
@@ -4790,14 +4254,6 @@ class CSlangParser ( Parser ):
         def getRuleIndex(self):
             return CSlangParser.RULE_array_lit
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterArray_lit" ):
-                listener.enterArray_lit(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitArray_lit" ):
-                listener.exitArray_lit(self)
-
 
 
 
@@ -4845,14 +4301,6 @@ class CSlangParser ( Parser ):
 
         def getRuleIndex(self):
             return CSlangParser.RULE_arr_ele
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterArr_ele" ):
-                listener.enterArr_ele(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitArr_ele" ):
-                listener.exitArr_ele(self)
 
 
 

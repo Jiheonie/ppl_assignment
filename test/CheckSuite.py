@@ -517,6 +517,7 @@ class CheckSuite(unittest.TestCase):
     #         }
     #     }
     #     class A {
+    #         func constructor() {}
     #         const x:int;
     #     }
     #     """
@@ -532,6 +533,7 @@ class CheckSuite(unittest.TestCase):
     #         }
     #     }
     #     class A {
+    #         func constructor() {}
     #         var x:int;
     #     }
     #     """
@@ -1046,6 +1048,7 @@ class CheckSuite(unittest.TestCase):
     #       }
     #     }
     #     class A {
+    #       func constructor() {}
     #       var a: [3]int;
     #       var b: int;
     #     }
@@ -1065,6 +1068,7 @@ class CheckSuite(unittest.TestCase):
     #       }
     #     }
     #     class A {
+    #       func constructor() {}
     #       var a: [3]int;
     #       var b: int;
     #     }
@@ -1307,12 +1311,13 @@ class CheckSuite(unittest.TestCase):
     #             x.a := 1;
     #         }
     #     }
-    #     class B <- A {}
+    #     class B <- A {
+    #     }
     #     class B {
     #         var a:int;
     #     }
     #     """
-    #     expect = ""
+    #     expect = "Type Mismatch In Expression: NewExpr(Id(A),[])"
     #     self.assertTrue(TestChecker.test(input,expect,691))
 
     # def test_sth2(self):
@@ -1342,3 +1347,99 @@ class CheckSuite(unittest.TestCase):
     #     """
     #     expect = "Undeclared Identifier: b"
     #     self.assertTrue(TestChecker.test(input,expect,693))
+
+    # def test_inheritance(self):
+    #     input = """
+    #     class a <- Program{
+    #         const temp2:int = 2;
+    #         func @main():void{
+    #             var arr:[2]int = [2,5];
+    #             self.temp2 := 2;
+    #         }
+    #         const temp:int;
+    #     }
+    #     class a{
+    #         var a:int = 2;
+    #     }
+    #     """
+    #     expect = "Cannot Assign To Constant: AssignStmt(FieldAccess(Self(),Id(temp2)),IntLit(2))"
+    #     self.assertTrue(TestChecker.test(input,expect,694))
+
+    # def test_arr_basic_5(self):
+    #     input = """
+    #     class Program{
+    #         func @main():void{
+    #             var arr:[2]int = [2,5];
+    #             io.@writeFloat(arr[arr[1]+5]);
+    #         }
+    #         const temp:int;
+    #     }
+    #     """
+    #     expect = "Type Mismatch In Statement: Call(Id(io),Id(@writeFloat),[ArrayCell(Id(arr),BinaryOp(+,ArrayCell(Id(arr),IntLit(1)),IntLit(5)))])"
+    #     self.assertTrue(TestChecker.test(input,expect,695))
+
+    # def test_attr_basic_3(self):
+    #     input = """
+    #     class Program{
+    #         var a:int = 2;
+    #         func @main():void{
+    #             var c: int = self.temp.t;
+    #         }
+    #         const temp:int;
+    #     }
+    #     """
+    #     expect = "Type Mismatch In Expression: FieldAccess(FieldAccess(Self(),Id(temp)),Id(t))"
+    #     self.assertTrue(TestChecker.test(input,expect,696))
+
+    # def test_attr_basic_1(self):
+    #     input = """
+    #     class Program{
+    #         var a:int = 2;
+    #         func @main():void{
+    #             var c: int = (1+2).t;
+    #         }
+    #         const temp:int;
+    #     }
+    #     """
+    #     expect = "Type Mismatch In Expression: FieldAccess(BinaryOp(+,IntLit(1),IntLit(2)),Id(t))"
+    #     self.assertTrue(TestChecker.test(input,expect,697))
+
+    # def test_constructor_basic_2(self):
+    #     input = """
+    #     class Program{
+    #         func @main():void{
+    #             var temp:a = new a(5.2,new b());
+    #         }
+    #         const temp:int;
+    #     }
+    #     class a{
+    #         func constructor(b:int,t:a){
+            
+    #         }
+    #     }
+    #     class a <- b{
+    #         func constructor(){}
+    #     }
+    #     """
+    #     expect = "Type Mismatch In Expression: NewExpr(Id(a),[FloatLit(5.2),NewExpr(Id(b),[])])"
+    #     self.assertTrue(TestChecker.test(input,expect,698))
+
+    # def test_constructor_basic(self):
+    #     input = """
+    #     class Program{
+    #         func @main():void{
+    #             const temp:a = new a(5,new b());
+    #         }
+    #         const temp:int;
+    #     }
+    #     class a{
+    #         func constructor(a:int,t:a){
+            
+    #         }
+    #     }
+    #     class a <- b{
+    #         func constructor(){}
+    #     }
+    #     """
+    #     expect = "Type Mismatch In Expression: NewExpr(Id(a),[IntLit(5),NewExpr(Id(b),[])])"
+    #     self.assertTrue(TestChecker.test(input,expect,699))
